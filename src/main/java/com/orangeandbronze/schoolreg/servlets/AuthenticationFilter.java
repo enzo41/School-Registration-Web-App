@@ -12,18 +12,20 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.orangeandbronze.schoolreg.users.User;
+
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AuthenticationFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public AuthenticationFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -35,9 +37,14 @@ public class AuthenticationFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			request.getRequestDispatcher("/login.jsp").forward(request,
+					response);
+		}
 		chain.doFilter(request, response);
 	}
 
