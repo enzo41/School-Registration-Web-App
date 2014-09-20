@@ -13,5 +13,5 @@ The Entity class is the [Layer Supertype](http://martinfowler.com/eaaCatalog/lay
 
 ## Super-Simple Authentication
 
-I created a very simple authentication component just to demonstrate Filters. This is not meant to be a recommended approach. Creating an effective, secure authentication framework is very, very difficult. Better rely on an established framework like Spring Security.
+I created a very simple authentication component just to demonstrate Filters. This is not meant to be a recommended approach. Creating an effective, secure authentication framework is very, very difficult. For real systems, better rely on an established framework like Spring Security.
 
