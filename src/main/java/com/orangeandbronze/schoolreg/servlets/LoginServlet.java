@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.orangeandbronze.schoolreg.service.LoginService;
+import com.orangeandbronze.schoolreg.users.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -24,6 +25,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
+		User user = service.getUser(userId);		// We'll allow the User class to leak into the presentation layer since authentication should be infrastructure and not domain. The alternative would be to use Collections or Maps of Strings, which would be error-prone.
+		if (user.getType() == User.Type.INVALID) {
+			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+		}else {
+			request.getSession().setAttribute("user", user);
+		}
 	}
 
 }
