@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-You are logged in as ${ user }.
+You are logged in as ${ user.name }, with User ID ${ user.userId } and type ${ user.type }.
 </div>
 <h1>Enlist in Sections</h1>
 <form action="enlist" method="post">
