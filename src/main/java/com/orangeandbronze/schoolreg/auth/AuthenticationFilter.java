@@ -12,17 +12,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet Filter implementation class AuthenticationFilter
- */
-@WebFilter("/*")
+@WebFilter("/*")	// Intercepts all incoming requests
 public class AuthenticationFilter implements Filter {
 
 	private LoginService service = new LoginService();
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {		
 		
@@ -36,7 +30,8 @@ public class AuthenticationFilter implements Filter {
 			// check if there's a userId in the request, if so, get a new User
 			String userId = request.getParameter("userId");
 			if (userId == null || userId.trim().equals("")) {
-				// Go back to login page.
+				// Go (back) to login page.
+				request.setAttribute("users", service.getUsers());
 				request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
 			} else {

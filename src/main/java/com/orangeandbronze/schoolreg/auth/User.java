@@ -1,15 +1,15 @@
 package com.orangeandbronze.schoolreg.auth;
 
-import com.orangeandbronze.entity.Entity;
+public class User {
+	public enum Type {
+		STUDENT, ADMIN, INVALID
+	}
 
-public class User extends Entity {
-	public enum Type {STUDENT, ADMIN, INVALID}
-	
 	/** If user is student, studentId is same as userId. **/
 	private final Integer userId;
 	private Type type;
 	private String name;
-	
+
 	User(Integer userId, Type type, String name) {
 		this.userId = userId;
 		this.type = type;
@@ -27,7 +27,7 @@ public class User extends Entity {
 	public String getName() {
 		return name;
 	}
-	
+
 	boolean isInvalid() {
 		return type == Type.INVALID;
 	}
@@ -60,5 +60,4 @@ public class User extends Entity {
 				+ "]";
 	}
 
-	
 }

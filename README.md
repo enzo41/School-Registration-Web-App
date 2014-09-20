@@ -11,3 +11,7 @@ Notice that I have eschewed Interfaces for the Services and DAOs. I've never enc
 
 The Entity class is the [Layer Supertype](http://martinfowler.com/eaaCatalog/layerSupertype.html) for all the domain entities. It's sole job is to hold a private key, to map each entity to a row in the database. This is set and get in the DAOs through Reflection. Hibernate uses Reflection as well to set and get final fields.
 
+## Super-Simple Authentication
+
+I created a very simple authentication component just to demonstrate Filters. This is not meant to be a recommended approach. Creating an effective, secure authentication framework is very, very difficult. Better rely on an established framework like Spring Security.
+

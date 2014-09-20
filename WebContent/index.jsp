@@ -9,7 +9,7 @@
 <body>
 
 <div>
-You are logged in as ${ user.name }, with User ID ${ user.userId } and type ${ user.type }.
+You are logged-in as <strong>${ user.name }</strong>, with User ID <strong>${ user.userId }</strong> and type <strong>${ user.type }</strong>.
 </div>
 
 <div>
