@@ -1,6 +1,5 @@
 package com.orangeandbronze.schoolreg.domain;
 
-import com.orangeandbronze.entity.Entity;
 
 public class Faculty extends Entity {	
 	

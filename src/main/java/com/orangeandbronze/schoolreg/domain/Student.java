@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.orangeandbronze.entity.Entity;
-
 public class Student extends Entity {
 	
 	private final Integer studentNumber;

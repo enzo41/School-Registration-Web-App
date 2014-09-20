@@ -3,8 +3,6 @@ package com.orangeandbronze.schoolreg.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.orangeandbronze.entity.Entity;
-
 public class Section extends Entity {
 
 	private final String sectionNumber;

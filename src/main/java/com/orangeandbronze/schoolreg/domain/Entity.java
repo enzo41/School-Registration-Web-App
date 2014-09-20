@@ -1,4 +1,4 @@
-package com.orangeandbronze.entity;
+package com.orangeandbronze.schoolreg.domain;
 
 /**
  * This implements the 
