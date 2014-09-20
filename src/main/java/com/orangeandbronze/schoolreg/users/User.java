@@ -3,14 +3,14 @@ package com.orangeandbronze.schoolreg.users;
 import com.orangeandbronze.entity.Entity;
 
 public class User extends Entity {
-	public enum Type {STUDENT, ADMIN}
+	public enum Type {STUDENT, ADMIN, INVALID}
 	
 	/** If user is student, studentId is same as userId. **/
-	private final int userId;
+	private final Integer userId;
 	private Type type;
 	private String name;
 	
-	public User(int userId, Type type, String name) {
+	public User(Integer userId, Type type, String name) {
 		this.userId = userId;
 		this.type = type;
 		this.name = name;
