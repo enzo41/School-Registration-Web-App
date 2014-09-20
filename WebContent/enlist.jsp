@@ -7,13 +7,11 @@
 <title>O &amp; B University</title>
 </head>
 <body>
+<div>
+You are logged in as ${session.student }.
+</div>
 <h1>Enlist in Sections</h1>
 <form action="enlist" method="post">
-
-<h2>Who are you?</h2>
-<input type="radio" name="studentNumber" value="111">Grady Booch
-<input type="radio" name="studentNumber" value="222">James Rumbaugh
-<input type="radio" name="studentNumber" value="333">Ivar Jacobson
 
 <h2>Choose Your Sections</h2>
 <input type="checkbox" name="sectionNumber" value="AAA111">Math 11 - AAA111

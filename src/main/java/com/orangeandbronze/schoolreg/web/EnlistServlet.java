@@ -23,7 +23,6 @@ public class EnlistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String studentNumber = request.getParameter("studentNumber");
 		String[] sectionNumbers = request.getParameterValues("sectionNumber");
 	}
 
