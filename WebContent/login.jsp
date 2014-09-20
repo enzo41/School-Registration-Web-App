@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="login" method="post">
+<form  method="post">
 
 <h2>Who are you?</h2>
 <input type="radio" name="userId" value="111">Grady Booch
@@ -17,6 +17,8 @@
 <div>
 <input type="submit" value="Submit">
 </div>
+
+
 </form>
 </body>
 </html>

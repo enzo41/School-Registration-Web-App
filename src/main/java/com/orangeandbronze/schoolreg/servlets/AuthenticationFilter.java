@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.orangeandbronze.schoolreg.service.LoginService;
 import com.orangeandbronze.schoolreg.users.User;
 
 /**
@@ -20,39 +21,40 @@ import com.orangeandbronze.schoolreg.users.User;
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-	/**
-	 * Default constructor.
-	 */
-	public AuthenticationFilter() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	private LoginService service = new LoginService();
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		HttpSession session = ((HttpServletRequest) request).getSession();
+			FilterChain chain) throws IOException, ServletException {		
+		
+		HttpServletRequest hreq = (HttpServletRequest) request;
+		HttpSession session = hreq.getSession();
 		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			request.getRequestDispatcher("/login.jsp").forward(request,
-					response);
+		if (user == null || user.isInvalid()) {
+			
+			String userId = request.getParameter("userId");
+			if (userId == null || userId.trim().equals("")) {
+				// Go back to login page.
+				request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+				return;
+			} else {
+				// instatiate a User and save to session
+				session.setAttribute("user", service.getUser(Integer.parseInt(userId)));
+				
+			}
+			
+			
+			
 		}
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+	}
+
+	public void destroy() {
 	}
 
 }

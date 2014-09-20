@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-You are logged in as ${session.student }.
+You are logged in as ${ user }.
 </div>
 <h1>Enlist in Sections</h1>
 <form action="enlist" method="post">

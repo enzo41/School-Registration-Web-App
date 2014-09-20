@@ -27,6 +27,10 @@ public class User extends Entity {
 	public String getName() {
 		return name;
 	}
+	
+	public boolean isInvalid() {
+		return type == Type.INVALID;
+	}
 
 	@Override
 	public int hashCode() {
