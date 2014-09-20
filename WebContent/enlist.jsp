@@ -16,8 +16,13 @@
 <input type="radio" name="studentNumber" value="333">Ivar Jacobson
 
 <h2>Choose Your Sections</h2>
+<input type="checkbox" name="sectionNumber" value="AAA111">Math 11 - AAA111
+<input type="checkbox" name="sectionNumber" value="BBB222">Math 14 - BBB222
+<input type="checkbox" name="sectionNumber" value="CCC333">Math 53 - CCC333
 
+<div>
 <input type="submit" value="Submit">
+</div>
 </form>
 </body>
 </html>
