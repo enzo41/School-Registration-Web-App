@@ -1,4 +1,4 @@
-package com.orangeandbronze.schoolreg.web;
+package com.orangeandbronze.schoolreg.servlets;
 
 import java.io.IOException;
 
