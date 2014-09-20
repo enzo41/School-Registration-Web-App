@@ -1,4 +1,4 @@
-package com.orangeandbronze.schoolreg.users;
+package com.orangeandbronze.schoolreg.auth;
 
 import com.orangeandbronze.entity.Entity;
 
@@ -10,7 +10,7 @@ public class User extends Entity {
 	private Type type;
 	private String name;
 	
-	public User(Integer userId, Type type, String name) {
+	User(Integer userId, Type type, String name) {
 		this.userId = userId;
 		this.type = type;
 		this.name = name;
@@ -28,7 +28,7 @@ public class User extends Entity {
 		return name;
 	}
 	
-	public boolean isInvalid() {
+	boolean isInvalid() {
 		return type == Type.INVALID;
 	}
 

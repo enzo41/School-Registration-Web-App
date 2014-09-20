@@ -1,4 +1,4 @@
-package com.orangeandbronze.schoolreg.servlets;
+package com.orangeandbronze.schoolreg.auth;
 
 import java.io.IOException;
 
@@ -11,9 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import com.orangeandbronze.schoolreg.service.LoginService;
-import com.orangeandbronze.schoolreg.users.User;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter

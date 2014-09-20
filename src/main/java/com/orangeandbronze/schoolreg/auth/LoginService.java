@@ -1,11 +1,9 @@
-package com.orangeandbronze.schoolreg.service;
+package com.orangeandbronze.schoolreg.auth;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.orangeandbronze.schoolreg.users.User;
-
-public class LoginService {
+class LoginService {
 
 	private final Map<Integer, User> users = new HashMap<Integer, User>() {
 		{	
@@ -19,7 +17,7 @@ public class LoginService {
 		}
 	};
 
-	public User getUser(int userId) {
+	User getUser(int userId) {
 		return users.getOrDefault(userId, new User(null, User.Type.INVALID, null));
 	}
 
