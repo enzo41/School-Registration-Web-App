@@ -3,6 +3,8 @@ package com.orangeandbronze.schoolreg.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.orangeandbronze.entity.Entity;
+
 public class Subject extends Entity {
 	
 	private final String subjectId;

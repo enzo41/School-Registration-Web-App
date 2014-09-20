@@ -3,6 +3,8 @@ package com.orangeandbronze.schoolreg.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.orangeandbronze.entity.Entity;
+
 public class Enrollment extends Entity implements Comparable<Enrollment>{
 	
 	private final int enrollmentNumber;	
