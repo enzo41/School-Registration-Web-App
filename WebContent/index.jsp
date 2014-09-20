@@ -15,7 +15,7 @@ You are logged in as ${ user.name }, with User ID ${ user.userId } and type ${ u
 <div>
 <h2>What would you like to do?</h2>
 <ul>
-	<li><a href="/enlist">Enlist</a>
+	<li><strong><a href="${pageContext.request.contextPath}/enlist.jsp">Enlist</a></strong></li>
 </ul>
 </div>
 
