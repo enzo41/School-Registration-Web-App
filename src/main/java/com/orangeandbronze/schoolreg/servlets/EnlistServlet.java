@@ -1,6 +1,7 @@
 package com.orangeandbronze.schoolreg.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,13 @@ public class EnlistServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] sectionNumbers = request.getParameterValues("sectionNumber");
+		
+		// placeholder code
+		response.setContentType("text/html");
+		PrintWriter w = response.getWriter();
+		w.println("<p>You have chosen to enlist in the following section #s: " + sectionNumbers);
+		w.println("<p>Now get to work and finish this machine problem!");
+		w.flush();
 	}
 
 }
