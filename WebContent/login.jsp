@@ -10,9 +10,9 @@
 <form action="login" method="post">
 
 <h2>Who are you?</h2>
-<input type="radio" name="studentNumber" value="111">Grady Booch
-<input type="radio" name="studentNumber" value="222">James Rumbaugh
-<input type="radio" name="studentNumber" value="333">Ivar Jacobson
+<input type="radio" name="userId" value="111">Grady Booch
+<input type="radio" name="userId" value="222">James Rumbaugh
+<input type="radio" name="userId" value="333">Ivar Jacobson
 
 <div>
 <input type="submit" value="Submit">
