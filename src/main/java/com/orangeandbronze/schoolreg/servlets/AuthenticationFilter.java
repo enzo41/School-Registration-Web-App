@@ -32,8 +32,11 @@ public class AuthenticationFilter implements Filter {
 		HttpServletRequest hreq = (HttpServletRequest) request;
 		HttpSession session = hreq.getSession();
 		User user = (User) session.getAttribute("user");
+		
+		// if no user was found in session
 		if (user == null || user.isInvalid()) {
 			
+			// check if there's a userId in the request, if so, get a new User
 			String userId = request.getParameter("userId");
 			if (userId == null || userId.trim().equals("")) {
 				// Go back to login page.
