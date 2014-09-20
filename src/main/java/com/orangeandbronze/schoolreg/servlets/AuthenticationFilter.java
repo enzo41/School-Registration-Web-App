@@ -41,14 +41,10 @@ public class AuthenticationFilter implements Filter {
 				return;
 			} else {
 				// instatiate a User and save to session
-				session.setAttribute("user", service.getUser(Integer.parseInt(userId)));
-				
-			}
-			
-			
-			
+				session.setAttribute("user", service.getUser(Integer.parseInt(userId)));			
+			}			
 		}
-		chain.doFilter(request, response);
+		chain.doFilter(request, response); // go to the original request
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
