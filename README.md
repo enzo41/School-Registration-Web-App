@@ -17,16 +17,21 @@ I created a very simple authentication component just to demonstrate Filters. Th
 
 # How to Build & Run This Application
 
-1. Make sure you have Java Developer Kit (JDK) version 7 or above installed. Note that it must be a Java Developers Kit and not just a Java Runtime Environment (JRE).
-2. Have [Maven](http://maven.apache.org/) installed.
-3. Tomcat version 7 or above installed, or some other equivalent Java Servlet container.
-4. Be connected to the internet.
-5. Open a command terminal and navigate to the project directory.
-6. Run the command 'mvn package'. This will download dependencies, compile the code, create a directory called 'target', and create a file with a '.war' extension.
-7. Copy the .war file and paste it in the 'webapps' directory of Tomcat (or whatever is your Servlet container).
-8. Start Tomcat/servlet container.
-9. Open a browser and go to 'http://localhost:8080/<name of the war file (not including the .war extension)>
+ 1. Make sure you have Java Developer Kit (JDK) version 7 or above installed. Note that it must be a Java Developers Kit and not just a Java Runtime Environment (JRE).
+ 2. Have [Maven](http://maven.apache.org/) installed.
+ 3. Tomcat version 7 or above installed, or some other equivalent Java Servlet container.
+ 4. Be connected to the internet.
+ 5. Open a command terminal and navigate to the project directory.
+ 6. Run the command 'mvn package'. This will download dependencies, compile the code, create a directory called 'target', and create a file with a '.war' extension.
+ 7. Copy the .war file and paste it in the 'webapps' directory of Tomcat (or whatever is your Servlet container).
+ 8. Start Tomcat/servlet container.
+ 9. Open a browser and go to 'http://localhost:8080/<name of the war file (not including the .war extension)>
 
 ## Using Eclipse
 
 If you would like to use Eclipse with this project, note that you will need to configure the Eclipse project to use Maven. Just right-click the project root and go to Configure --> Convert to Maven Project. After that, right-click the project root again and go to Maven --> Update Project. That should set up all your project dependencies.
+
+# To Do
+ * DAO layer using JDBC
+ * MySQL DDL
+ * Error Pages
