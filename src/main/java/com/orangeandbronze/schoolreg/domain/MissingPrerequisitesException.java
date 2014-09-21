@@ -1,6 +1,6 @@
 package com.orangeandbronze.schoolreg.domain;
 
-public class MissingPrerequisitesException extends DomainException {
+public class MissingPrerequisitesException extends RuntimeException {
 
 
 	MissingPrerequisitesException(String message) {

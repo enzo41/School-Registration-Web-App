@@ -1,6 +1,6 @@
 package com.orangeandbronze.schoolreg.domain;
 
-public class EnlistmentConflictException extends DomainException {
+public class EnlistmentConflictException extends RuntimeException {
 
 
 	EnlistmentConflictException(String message) {
