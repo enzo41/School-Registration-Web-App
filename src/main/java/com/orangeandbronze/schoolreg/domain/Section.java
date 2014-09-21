@@ -32,6 +32,22 @@ public class Section extends Entity {
 		return subject;
 	}
 
+	public Faculty getInstructor() {
+		return instructor;
+	}
+
+	void setInstructor(Faculty instructor) {
+		this.instructor = instructor;
+	}
+
+	Schedule getSchedule() {
+		return schedule;
+	}
+
+	void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
 	boolean hasConflict(Section other) {
 		if (this. schedule == Schedule.TBA || other.schedule == Schedule.TBA ) {
 			return false;
