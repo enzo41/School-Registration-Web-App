@@ -35,3 +35,8 @@ If you would like to use Eclipse with this project, note that you will need to c
  * DAO layer using JDBC
  * MySQL DDL
  * Error Pages
+
+# Analysis
+
+I ran the code through Spoilkin Soice to do a graphical representation of the dependencies. Pretty clean, don't you think? I plan to do some other static analysis later on, maybe using SonarQube.
+(spoilkin.png)
