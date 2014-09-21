@@ -2,6 +2,7 @@
 *.jar
 *.war
 .classpath
+.project
 .settings/
 target/
 log/
