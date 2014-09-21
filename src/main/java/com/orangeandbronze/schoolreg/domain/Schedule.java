@@ -18,6 +18,14 @@ public class Schedule {
 		this.period = period;
 	}
 
+	public Days getDays() {
+		return days;
+	}
+
+	public Period getPeriod() {
+		return period;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
