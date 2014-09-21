@@ -18,7 +18,7 @@ public class ShowSectionsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("sections", service.getAllSections());
-		getServletContext().getRequestDispatcher("/enlist.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/WEB-INF/enlist.jsp").forward(request, response);
 	}
 
 }
