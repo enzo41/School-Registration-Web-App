@@ -25,7 +25,7 @@ I created a very simple authentication component just to demonstrate Filters. Th
  6. Run the command 'mvn package'. This will download dependencies, compile the code, create a directory called 'target', and create a file with a '.war' extension.
  7. Copy the .war file and paste it in the 'webapps' directory of Tomcat (or whatever is your Servlet container).
  8. Start Tomcat/servlet container.
- 9. Open a browser and go to 'http://localhost:8080/<name of the war file (not including the .war extension)>
+ 9. Open a browser and go to 'http://localhost:8080/{name of the war file (not including the .war extension)}
 
 ## Using Eclipse
 
