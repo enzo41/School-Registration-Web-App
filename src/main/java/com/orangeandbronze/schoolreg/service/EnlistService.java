@@ -19,6 +19,10 @@ public class EnlistService {
 	private StudentDao studentDao = new StudentDao();
 	private SectionDao sectionDao = new SectionDao();
 	private EnrollmentDao enrollmentDao = new EnrollmentDao();
+	
+	public Set<Section> getAllSections() {
+		return sectionDao.getAll();
+	}
 
 	/**
 	 * @param studentNumber
