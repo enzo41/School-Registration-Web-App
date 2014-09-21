@@ -20,13 +20,13 @@ public class EnlistServlet extends HttpServlet {
 
 	private EnlistService service = new EnlistService();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String[] sectionNumbers = request.getParameterValues("sectionNumber");
+		Integer studentNumber = (Integer) request.getSession().getAttribute("userId");
+		
+		// send section numbers to service, return with list of successfully enlisted & not successfully enlisted sections... for not successfully enlisted, state why
+		service.enlistSections(studentNumber, sectionNumbers);
 
 		// placeholder code
 		response.setContentType("text/html");
