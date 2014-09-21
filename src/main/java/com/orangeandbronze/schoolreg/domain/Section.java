@@ -28,7 +28,7 @@ public class Section extends Entity {
 		return sectionNumber;
 	}
 
-	Subject getSubject() {
+	public Subject getSubject() {
 		return subject;
 	}
 
