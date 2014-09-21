@@ -35,7 +35,7 @@ public class EnlistServiceTest {
 		
 		// one section should have schedule conflict
 		Section ddd444 = new Section(sectionNumbers[3], new Subject("PHILO1"), new Schedule(Days.TF, Period.PM4));
-		failedToEnlist.put(ddd444, "Current Section: " + alreadyEnlisted + ", New Section: " + ddd444);
+		failedToEnlist.put(ddd444, "Conflict with sections already enlisted.");
 		
 		// one section should have problems with prerequistes
 		Subject math11 = new Subject("MATH11");
@@ -48,7 +48,7 @@ public class EnlistServiceTest {
 			add(new Section("GGG777", math11));
 		}};
 		Enrollment previousEnrollment = new Enrollment(100, student, Term.Y2012_1ST, previousSections);
-		failedToEnlist.put(aaa111, "Enlisting in " + aaa111 + " but lacking prerequisite(s).");
+		failedToEnlist.put(aaa111, "Missing prerequisite/s.");
 		
 		/* Mock the daos */
 		StudentDao studentDao = mock(StudentDao.class);

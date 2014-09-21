@@ -9,7 +9,9 @@ import com.orangeandbronze.schoolreg.dao.EnrollmentDao;
 import com.orangeandbronze.schoolreg.dao.SectionDao;
 import com.orangeandbronze.schoolreg.dao.StudentDao;
 import com.orangeandbronze.schoolreg.domain.DomainException;
+import com.orangeandbronze.schoolreg.domain.EnlistmentConflictException;
 import com.orangeandbronze.schoolreg.domain.Enrollment;
+import com.orangeandbronze.schoolreg.domain.MissingPrerequisitesException;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Term;
@@ -36,7 +38,6 @@ public class EnlistService {
 	 *         reason why they failed to enlist.
 	 */
 	public EnlistmentResult enlistSections(Integer studentNumber, String[] sectionNumbers) {
-
 		// Fetch domain objects from DB
 		Student student = studentDao.getById(studentNumber);
 		Section[] sections = new Section[sectionNumbers.length];
@@ -52,8 +53,10 @@ public class EnlistService {
 			try {
 				enrollment.enlist(section);
 				successfullyEnlisted.add(section);
-			} catch (DomainException e) {
-				failedToEnlist.put(section, e.getMessage());
+			} catch (EnlistmentConflictException e) {
+				failedToEnlist.put(section, "Conflict with sections already enlisted.");
+			} catch (MissingPrerequisitesException e) {
+				failedToEnlist.put(section, "Missing prerequisite/s.");
 			}
 		}
 
