@@ -40,7 +40,7 @@ public class Section extends Entity {
 		this.instructor = instructor;
 	}
 
-	Schedule getSchedule() {
+	public Schedule getSchedule() {
 		return schedule;
 	}
 
