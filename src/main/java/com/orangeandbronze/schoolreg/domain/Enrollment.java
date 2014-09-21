@@ -45,7 +45,7 @@ public class Enrollment extends Entity implements Comparable<Enrollment>{
 		}		
 		
 		if (!student.hasTakenPrerequisites(newSec, this)) {
-			throw new MissingPrerequisitesException("");
+			throw new MissingPrerequisitesException("Enlisting in " + newSec + " but lacking prerequisite(s).");
 		}
 		sections.add(newSec);
 		
