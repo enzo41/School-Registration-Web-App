@@ -1,9 +1,6 @@
 package com.orangeandbronze.schoolreg.service;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.orangeandbronze.schoolreg.dao.*;
 import com.orangeandbronze.schoolreg.domain.*;
