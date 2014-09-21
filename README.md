@@ -15,3 +15,14 @@ The Entity class is the [Layer Supertype](http://martinfowler.com/eaaCatalog/lay
 
 I created a very simple authentication component just to demonstrate Filters. This is not meant to be a recommended approach. Creating an effective, secure authentication framework is very, very difficult. For real systems, better rely on an established framework like Spring Security.
 
+# How to Build & Run This Application
+
+1. Make sure you have Java Developer Kit (JDK) version 7 or above installed. Note that it must be a Java Developers Kit and not just a Java Runtime Environment (JRE).
+2. Have [Maven](http://maven.apache.org/) installed.
+3. Tomcat version 7 or above installed, or some other equivalent Java Servlet container.
+4. Be connected to the internet.
+5. Open a command terminal and navigate to the project directory.
+6. Run the command 'mvn package'. This will download dependencies, compile the code, create a directory called 'target', and create a file with a '.war' extension.
+7. Copy the .war file and paste it in the 'webapps' directory of Tomcat (or whatever is your Servlet container).
+8. Start Tomcat/servlet container.
+9. Open a browser and go to 'http://localhost:8080/<name of the war file (not including the .war extension)>
