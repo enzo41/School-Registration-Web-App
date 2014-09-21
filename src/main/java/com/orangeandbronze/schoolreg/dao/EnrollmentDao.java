@@ -11,4 +11,8 @@ public class EnrollmentDao {
 		return new Enrollment(777, student, term); // TODO Just a stub; implement actual as JDBC
 	}
 
+	public void save(Enrollment enrollment) {
+		// TODO Auto-generated method stub		
+	}
+
 }
