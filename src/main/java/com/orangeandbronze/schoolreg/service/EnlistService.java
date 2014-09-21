@@ -5,16 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.orangeandbronze.schoolreg.dao.EnrollmentDao;
-import com.orangeandbronze.schoolreg.dao.SectionDao;
-import com.orangeandbronze.schoolreg.dao.StudentDao;
-import com.orangeandbronze.schoolreg.domain.DomainException;
-import com.orangeandbronze.schoolreg.domain.EnlistmentConflictException;
-import com.orangeandbronze.schoolreg.domain.Enrollment;
-import com.orangeandbronze.schoolreg.domain.MissingPrerequisitesException;
-import com.orangeandbronze.schoolreg.domain.Section;
-import com.orangeandbronze.schoolreg.domain.Student;
-import com.orangeandbronze.schoolreg.domain.Term;
+import com.orangeandbronze.schoolreg.dao.*;
+import com.orangeandbronze.schoolreg.domain.*;
 
 public class EnlistService {
 
