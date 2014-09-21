@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.orangeandbronze.schoolreg.service.EnlistmentService;
+import com.orangeandbronze.schoolreg.service.EnlistService;
 
 /**
  * Servlet implementation class EnlistServlet
@@ -18,7 +18,7 @@ import com.orangeandbronze.schoolreg.service.EnlistmentService;
 public class EnlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private EnlistmentService service = new EnlistmentService();
+	private EnlistService service = new EnlistService();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
