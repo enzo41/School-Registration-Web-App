@@ -15,7 +15,7 @@ public class Enrollment extends Entity implements Comparable<Enrollment>{
 		this.student = student;
 		this.term = term;
 		if (!student.getEnrollments().contains(this)) {
-			student.addEnrollement(this);
+			student.add(this);
 		}
 	}
 	

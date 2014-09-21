@@ -28,16 +28,16 @@ public class Student extends Entity {
 		return new HashSet<>(enrollments);
 	}
 	
-	void addEnrollement(Enrollment e) {
+	void add(Enrollment e) {
 		enrollments.add(e);
 	}
 
-	Set<Enrollment> getPreviousEnrollments(Enrollment e) {
+	Set<Enrollment> getPreviousEnrollmentsTo(Enrollment e) {
 		return enrollments.headSet(e);
 	}
 
 	public boolean hasTakenPrerequisites(Section newSec, Enrollment currentEnrollment) {
-		Set<Enrollment> prevEnrollments = getPreviousEnrollments(currentEnrollment);
+		Set<Enrollment> prevEnrollments = getPreviousEnrollmentsTo(currentEnrollment);
 		return newSec.hasAllPrerequisitesIn(prevEnrollments);
 	}
 	

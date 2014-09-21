@@ -19,7 +19,7 @@ public class StudentTest {
 		Enrollment enrollment3 = new Enrollment(3, student, Term.Y2013_1ST);
 		Enrollment enrollment4 = new Enrollment(4, student, Term.Y2013_2ND);
 		
-		Set<Enrollment> previous = student.getPreviousEnrollments(enrollment3);
+		Set<Enrollment> previous = student.getPreviousEnrollmentsTo(enrollment3);
 		Set<Enrollment> expected = new HashSet<Enrollment>() {{ add(enrollment1); add(enrollment2); }};
 		assertEquals(expected, previous);
 	}
