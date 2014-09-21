@@ -12,8 +12,8 @@ import com.orangeandbronze.schoolreg.domain.Subject;
 public class SectionDao {
 
 	public Section getById(String sectionNumber) {
-		return new Section(sectionNumber, null); // TODO Just a stub; implement
-													// actual as JDBC
+		// TODO Just a stub; implement actual as JDBC
+		return new Section(sectionNumber, new Subject("xx PLACEHOLDER xx")); 
 	}
 
 	public Set<Section> getAll() {
