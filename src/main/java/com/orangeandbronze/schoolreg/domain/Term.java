@@ -6,6 +6,6 @@ public enum Term {
 	
 	/** Returns the last term in the enum. **/
 	public  static Term getCurrent() {
-		return values()[values().length];
+		return values()[values().length - 1];
 	}
 }
