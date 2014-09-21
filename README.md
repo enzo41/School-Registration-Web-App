@@ -26,3 +26,7 @@ I created a very simple authentication component just to demonstrate Filters. Th
 7. Copy the .war file and paste it in the 'webapps' directory of Tomcat (or whatever is your Servlet container).
 8. Start Tomcat/servlet container.
 9. Open a browser and go to 'http://localhost:8080/<name of the war file (not including the .war extension)>
+
+## Using Eclipse
+
+If you would like to use Eclipse with this project, note that you will need to configure the Eclipse project to use Maven. Just right-click the project root and go to Configure --> Convert to Maven Project. After that, right-click the project root again and go to Maven --> Update Project. That should set up all your project dependencies.
