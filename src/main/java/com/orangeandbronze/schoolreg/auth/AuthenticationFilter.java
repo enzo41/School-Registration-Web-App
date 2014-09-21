@@ -31,7 +31,7 @@ public class AuthenticationFilter implements Filter {
 			String userId = request.getParameter("userId");
 			if (userId == null || userId.trim().equals("")) {
 				// Go (back) to login page.
-				request.setAttribute("users", service.getUsers());
+				session.setAttribute("users", service.getUsers());
 				request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
 			} else {
