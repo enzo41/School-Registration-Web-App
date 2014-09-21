@@ -1,15 +1,17 @@
 package com.orangeandbronze.schoolreg.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.orangeandbronze.schoolreg.auth.User;
 import com.orangeandbronze.schoolreg.service.EnlistService;
+import com.orangeandbronze.schoolreg.service.EnlistService.EnlistmentResult;
 
 /**
  * Servlet implementation class EnlistServlet
@@ -20,25 +22,18 @@ public class EnlistServlet extends HttpServlet {
 
 	private EnlistService service = new EnlistService();
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] sectionNumbers = request.getParameterValues("sectionNumber");
-		Integer studentNumber = (Integer) request.getSession().getAttribute("userId");
+		HttpSession session = request.getSession();
+		Integer studentNumber = ((User) session.getAttribute("user")).getUserId();
 		
 		// send section numbers to service, return with list of successfully enlisted & not successfully enlisted sections... for not successfully enlisted, state why
-		service.enlistSections(studentNumber, sectionNumbers);
+		EnlistmentResult result = service.enlistSections(studentNumber, sectionNumbers);
 
-		// placeholder code
-		response.setContentType("text/html");
-		PrintWriter w = response.getWriter();
-		w.println("<p>You have chosen to enlist in the following section #s:");
-		w.println("<ul>");
-		for (String num : sectionNumbers) {
-			w.println("<li>" + num);
-		}
-		w.println("</ul>");
-		w.println("<p>Now get to work and finish this machine problem!");
-		w.flush();
+		// send insert result in session, forward to a JSP page; implements Post-Redirect-Get pattern
+		session.setAttribute("result", result);
+		response.sendRedirect(getServletContext().getContextPath() + "/enlistmentResult.jsp");
+		
 	}
 
 }
