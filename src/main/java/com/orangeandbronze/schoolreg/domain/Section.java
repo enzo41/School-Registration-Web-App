@@ -33,7 +33,7 @@ public class Section extends Entity {
 	}
 
 	boolean hasConflict(Section other) {
-		if (this.schedule == null) {
+		if (this. schedule == Schedule.TBA || other.schedule == Schedule.TBA ) {
 			return false;
 		}
 		return this.schedule.equals(other.schedule);
