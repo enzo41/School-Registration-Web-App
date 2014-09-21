@@ -13,7 +13,7 @@ public class Schedule {
 	private final Days days;
 	private final Period period;
 
-	Schedule(Days days, Period period) {
+	public Schedule(Days days, Period period) {
 		this.days = days;
 		this.period = period;
 	}

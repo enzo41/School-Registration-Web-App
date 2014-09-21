@@ -1,5 +1,5 @@
 package com.orangeandbronze.schoolreg.domain;
 
-enum Days {
+public enum Days {
 	MTH, TF, WS
 }
