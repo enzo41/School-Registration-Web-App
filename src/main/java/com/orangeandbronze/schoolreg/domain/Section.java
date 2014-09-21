@@ -16,6 +16,7 @@ public class Section extends Entity {
 		this.sectionNumber = sectionNumber;
 		this.subject = subject;
 		this.schedule = Schedule.TBA;
+		this.instructor = Faculty.TBA;
 	}
 
 	public Section(String sectionNumber, Subject subject, Schedule schedule) {
