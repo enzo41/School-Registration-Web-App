@@ -1,8 +1,9 @@
 package com.orangeandbronze.schoolreg.domain;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -23,6 +24,17 @@ public class EnrollmentTest {
 		enrollment.enlist(sec1);
 		Section sec2 = new Section("TFX123", new Subject("BA101"), new Schedule(Days.MTH, Period.AM10));
 		enrollment.enlist(sec2);
+	}
+	
+	@Test
+	public void enlistSectionIfScheduleIsNull() {
+		Enrollment enrollment = new Enrollment(123, new Student(456), Term.Y2014_1ST);
+		Section sec1 = new Section("MTH123", new Subject("ENG101"), new Schedule(Days.MTH, Period.AM10));
+		enrollment.enlist(sec1);
+		Section sec2 = new Section("TFX123", new Subject("BA101"));
+		enrollment.enlist(sec2);
+		Set<Section> expected = new HashSet<Section>() {{ add(sec1); add(sec2); }};
+		assertEquals(expected, enrollment.getSections());
 	}
 	
 	@Test(expected = MissingPrerequisitesException.class)
@@ -52,6 +64,4 @@ public class EnrollmentTest {
 		Enrollment enrollment = new Enrollment(123, student, Term.Y2014_1ST);		
 		enrollment.enlist(newSection);
 	}
-
-
 }

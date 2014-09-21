@@ -12,12 +12,13 @@ public class Section extends Entity {
 	private Faculty instructor;
 	private Schedule schedule;
 
-	Section(String sectionNumber, Subject subject) {
+	public Section(String sectionNumber, Subject subject) {
 		this.sectionNumber = sectionNumber;
 		this.subject = subject;
+		this.schedule = Schedule.TBA;
 	}
 
-	Section(String sectionNumber, Subject subject, Schedule schedule) {
+	public Section(String sectionNumber, Subject subject, Schedule schedule) {
 		this(sectionNumber, subject);
 		this.schedule = schedule;
 	}
@@ -84,7 +85,7 @@ public class Section extends Entity {
 
 	@Override
 	public String toString() {
-		return "Section " + sectionNumber + " " + subject;
+		return "Section " + sectionNumber + " {" + subject + " " + schedule + "} ";
 	}
 
 }

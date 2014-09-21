@@ -1,12 +1,18 @@
 package com.orangeandbronze.schoolreg.domain;
 
-
 public class Schedule {
-	
-	
+
+	static final Schedule TBA = new Schedule(null, null) {
+
+		@Override
+		public String toString() {
+			return "Schedule [TBA]";
+		}
+	};
+
 	private final Days days;
 	private final Period period;
-	
+
 	Schedule(Days days, Period period) {
 		this.days = days;
 		this.period = period;
@@ -39,8 +45,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [days=" + days + ", period=" + period + "]";
+		return "Schedule [" + days + " " + period + "]";
 	}
-	
-	
+
 }
