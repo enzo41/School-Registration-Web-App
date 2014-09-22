@@ -22,32 +22,32 @@ public class EnlistServiceTest {
 		
 		/* domain model */
 		Student student = new Student(studentNumber);		
-		Section alreadyEnlisted = new Section("ZZZ000", new Subject("CHEM11"), new Schedule(Days.TF, Period.PM4));
-		Enrollment currentEnrollment = new Enrollment(143, student, Term.getCurrent(), new HashSet<Section>() {{ add(alreadyEnlisted); }});
+		final Section alreadyEnlisted = new Section("ZZZ000", new Subject("CHEM11"), new Schedule(Days.TF, Period.PM4));
+		final Enrollment currentEnrollment = new Enrollment(143, student, Term.getCurrent(), new HashSet<Section>() {{ add(alreadyEnlisted); }});
 		// three sections should pass
-		Section bbb222 = new Section(sectionNumbers[1], new Subject("COM1"));
-		Section ccc333 = new Section(sectionNumbers[2], new Subject("CS11"));
-		Section eee555 = new Section(sectionNumbers[4], new Subject("CS11"));
-		Set<Section> successfullyEnlisted = new HashSet<Section>() {{ add(bbb222); add(ccc333); add(eee555); }}; 
+		final Section bbb222 = new Section(sectionNumbers[1], new Subject("COM1"));
+		final Section ccc333 = new Section(sectionNumbers[2], new Subject("CS11"));
+		final Section eee555 = new Section(sectionNumbers[4], new Subject("CS11"));
+		final Set<Section> successfullyEnlisted = new HashSet<Section>() {{ add(bbb222); add(ccc333); add(eee555); }}; 
 		
 		// Map of failed enlistments
-		Map<Section, String> failedToEnlist = new HashMap<>();
+		final Map<Section, String> failedToEnlist = new HashMap<>();
 		
 		// one section should have schedule conflict
-		Section ddd444 = new Section(sectionNumbers[3], new Subject("PHILO1"), new Schedule(Days.TF, Period.PM4));
+		final Section ddd444 = new Section(sectionNumbers[3], new Subject("PHILO1"), new Schedule(Days.TF, Period.PM4));
 		failedToEnlist.put(ddd444, "Conflict with sections already enlisted.");
 		
 		// one section should have problems with prerequistes
-		Subject math11 = new Subject("MATH11");
-		Subject math14 = new Subject("MATH14");
-		Set<Subject> prerequisitesToMath53 = new HashSet<Subject>() {{ add(math11); add(math14); }};
-		Subject math53 = new Subject("MATH53", prerequisitesToMath53);
-		Section aaa111 = new Section(sectionNumbers[0], math53, new Schedule(Days.MTH, Period.AM10));
+		final Subject math11 = new Subject("MATH11");
+		final Subject math14 = new Subject("MATH14");
+		final Set<Subject> prerequisitesToMath53 = new HashSet<Subject>() {{ add(math11); add(math14); }};
+		final Subject math53 = new Subject("MATH53", prerequisitesToMath53);
+		final Section aaa111 = new Section(sectionNumbers[0], math53, new Schedule(Days.MTH, Period.AM10));
 		// only enrolled previously in Math11 but not Math14
-		Set<Section> previousSections = new HashSet<Section>() {{
+		final Set<Section> previousSections = new HashSet<Section>() {{
 			add(new Section("GGG777", math11));
 		}};
-		Enrollment previousEnrollment = new Enrollment(100, student, Term.Y2012_1ST, previousSections);
+		final Enrollment previousEnrollment = new Enrollment(100, student, Term.Y2012_1ST, previousSections);
 		failedToEnlist.put(aaa111, "Missing prerequisite/s.");
 		
 		/* Mock the daos */
