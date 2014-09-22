@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.orangeandbronze.schoolreg</groupId>
 	<artifactId>SchoolReg</artifactId>
-	<version>0.02.10-SNAPSHOT</version>
+	<version>0.03.00-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
 		<plugins>
