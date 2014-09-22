@@ -12,7 +12,7 @@ public class Faculty extends Entity {
 
 	private final Integer facultyNumber;
 
-	Faculty(Integer facultyNumber) {
+	public Faculty(Integer facultyNumber) {
 		this.facultyNumber = facultyNumber;
 
 	}
