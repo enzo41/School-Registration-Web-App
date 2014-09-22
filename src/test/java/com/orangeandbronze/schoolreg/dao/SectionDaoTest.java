@@ -54,5 +54,27 @@ public class SectionDaoTest extends DBTestCase {
 		assertEquals(expected.getInstructor(), actual.getInstructor());
 		assertEquals(expected.getSchedule(), actual.getSchedule());
 	}
+	
+	public void testGetByIdSubjectHasPrerequisites() {
+		SectionDao dao = new SectionDao();
+		Section actual = dao.getById("AAA111");
+		final Subject math11 = new Subject("MATH11");
+		final Subject math14 = new Subject("MATH14");
+		final Set<Subject> expectedPrereq = new HashSet<Subject>() {{ add(math11); add(math14); }};
+		Subject expectedSubject = new Subject("MATH53", expectedPrereq);
+		Section expected = new Section("AAA111", expectedSubject, new Schedule(Days.MTH, Period.AM10));
+		assertEquals(expected, actual);
+		assertEquals(expected.getInstructor(), actual.getInstructor());
+		assertEquals(expected.getSchedule(), actual.getSchedule());
+		
+		Subject actualSubject = actual.getSubject();
+		assertEquals(expectedSubject, actualSubject);
+		
+		Set<Subject> actualPrereq = actualSubject.getPrerequisites();
+		
+		assertEquals(expectedPrereq, actualPrereq);
+		
+		
+	}
 
 }
