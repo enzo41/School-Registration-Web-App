@@ -18,6 +18,7 @@ public class ShowSectionsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("sections", service.getAllSections());
+		// enlist.jsp is in WEB-INF so it cannot be accessed by users directly
 		getServletContext().getRequestDispatcher("/WEB-INF/enlist.jsp").forward(request, response);
 	}
 
