@@ -18,6 +18,7 @@ import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
 
+// TODO Factor out duplicate code
 public class SectionDao {
 
 	public SectionDao() {
@@ -29,21 +30,6 @@ public class SectionDao {
 					e);
 		}
 	}
-
-	private Map<String, Section> allSections = new HashMap<String, Section>() {
-		{
-			put("AAA111", new Section("AAA111", new Subject("MATH53"),
-					new Schedule(Days.MTH, Period.AM10)));
-			put("BBB222", new Section("BBB222", new Subject("COM1")));
-			put("CCC333", new Section("CCC333", new Subject("CS11")));
-			put("DDD444", new Section("DDD444", new Subject("PHILO1"),
-					new Schedule(Days.TF, Period.PM4)));
-			put("EEE555", new Section("EEE555", new Subject("CS11")));
-			put("GGG777", new Section("GGG777", new Subject("MATH11")));
-			put("ZZZ000", new Section("ZZZ000", new Subject("CHEM11"),
-					new Schedule(Days.TF, Period.PM4)));
-		}
-	};
 
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(
@@ -97,15 +83,15 @@ public class SectionDao {
 				}
 				
 				// TODO Try to handle with just one SQL call instead of multiple
+				// TODO handle deep recursive prereqs
+
 				// get prereqs
 				int fkPrerequisite = rs.getInt("fk_prerequisite");
 				PreparedStatement prereqPstmt = conn
 						.prepareStatement("SELECT subject_id FROM subjects WHERE pk = ?");
 				prereqPstmt.setInt(1, fkPrerequisite);
 				ResultSet rsPrereq = prereqPstmt.executeQuery();
-
-				// TODO handle deep recursive prereqs
-
+				
 				while (rsPrereq.next()) {
 					Subject prereq = new Subject(
 							rsPrereq.getString("subject_id"));
@@ -149,10 +135,71 @@ public class SectionDao {
 		return section;
 
 	}
-
+	
+	// TODO Fetch prerequisites
 	public Set<Section> getAll() {
-		// TODO Just a stub; implement actual as JDBC
-		return new HashSet<Section>(allSections.values());
+		String sql = "SELECT sections.*, subjects.subject_id, faculty.faculty_number FROM sections "
+				+ "INNER JOIN subjects ON sections.fk_subject = subjects.pk "
+				+ "INNER JOIN faculty ON sections.fk_faculty = faculty.pk ";
+		
+		Set<Section> sections = new HashSet<>();
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				long pk = rs.getInt("pk");
+				String sectionNumber = rs.getString("section_number");
+				long fkSubject = rs.getInt("fk_subject");
+				long fkFaculty = rs.getInt("fk_faculty");
+				String scheduleString = rs.getString("schedule");
+				String subjectId = rs.getString("subject_id");
+				int facultyNum = rs.getInt("faculty_number");
+				Faculty instructor;
+
+				if (fkFaculty != 0) { // not TBA
+					instructor = new Faculty(facultyNum);
+					// Set private key so we can map it to a DB row later on
+					// for saving/updating.
+					Field facultyPk = Subject.class.getSuperclass()
+							.getDeclaredField("primaryKey");
+					facultyPk.setAccessible(true);
+					facultyPk.set(instructor, fkFaculty);
+				} else { // TBA
+					instructor = Faculty.TBA;
+				}
+				
+				Subject subject = new Subject(subjectId);
+				// Set private key so we can map it to a DB row later on for
+				// saving/updating.
+				Field subjectPk = Subject.class.getSuperclass().getDeclaredField("primaryKey");
+				subjectPk.setAccessible(true);
+				subjectPk.set(subject, fkSubject);
+
+				String[] dayPeriod = scheduleString.split("\\s+");
+				Schedule schedule = dayPeriod.length > 1 ? new Schedule(
+						Days.valueOf(dayPeriod[0]), Period.valueOf(dayPeriod[1]))
+						: Schedule.TBA;
+				Section section = new Section(sectionNumber, subject, schedule, instructor);
+				Field sectionPk = Section.class.getSuperclass().getDeclaredField(
+						"primaryKey"); // Set private key so we can map it to a DB
+										// row later on for saving/updating.
+				sectionPk.setAccessible(true);
+				sectionPk.set(section, pk);
+				
+				sections.add(new Section(sectionNumber, subject, schedule, instructor));
+			}			
+			
+		} catch (SQLException e) {
+			throw new DataAccessException(
+					"Something happend while trying to fetch Section data", e);
+		} catch (ReflectiveOperationException e) {
+			throw new DataAccessException(
+					"Something happend seting section primary key via reflection.", e);
+		}
+		
+		return sections;
 	}
 
 }
