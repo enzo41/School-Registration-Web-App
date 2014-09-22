@@ -2,7 +2,7 @@ package com.orangeandbronze.schoolreg.domain;
 
 public class Schedule {
 
-	static final Schedule TBA = new Schedule(null, null) {
+	public static final Schedule TBA = new Schedule(null, null) {
 
 		@Override
 		public String toString() {
