@@ -28,7 +28,8 @@ class LoginService {
 	};
 
 	User getUser(int userId) {
-		return users.getOrDefault(userId, new User(null, User.Type.INVALID, null));
+		User user = users.get(userId);
+		return user != null ? user : new User(null, User.Type.INVALID, null);
 	}
 
 	Set<User> getUsers() {
