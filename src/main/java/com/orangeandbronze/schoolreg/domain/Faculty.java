@@ -6,7 +6,7 @@ public class Faculty extends Entity {
 
 		@Override
 		public String toString() {
-			return "Faculty [TBA]";
+			return "TBA";
 		}
 	};
 

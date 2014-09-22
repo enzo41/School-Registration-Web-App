@@ -25,7 +25,7 @@ public class SectionDao {
 	};
 
 	public Section getById(String sectionNumber) {
-		return allSections.get(sectionNumber);
+		return allSections.get(sectionNumber); // TODO Just a stub; implement actual as JDBC
 	}
 
 	public Set<Section> getAll() {
