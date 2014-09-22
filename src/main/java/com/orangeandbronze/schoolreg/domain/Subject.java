@@ -53,8 +53,7 @@ public class Subject extends Entity {
 
 	@Override
 	public String toString() {
-		return "Subject [subjectId=" + subjectId + ", prerequisites="
-				+ prerequisites + "]";
+		return subjectId;
 	}
 
 	
