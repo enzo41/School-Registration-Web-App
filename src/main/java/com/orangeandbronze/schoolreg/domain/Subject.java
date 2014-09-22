@@ -17,14 +17,6 @@ public class Subject extends Entity {
 		this.prerequisites.addAll(prerequisites);
 	}
 
-	public String getSubjectId() {
-		return subjectId;
-	}
-
-	public Set<Subject> getPrerequisites() {
-		return new HashSet<>(prerequisites);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,7 +49,13 @@ public class Subject extends Entity {
 				+ prerequisites + "]";
 	}
 
-	
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	public Set<Subject> getPrerequisites() {
+		return new HashSet<>(prerequisites);
+	}
 	
 
 }
