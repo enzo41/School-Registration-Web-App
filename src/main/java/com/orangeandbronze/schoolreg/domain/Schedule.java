@@ -6,7 +6,7 @@ public class Schedule {
 
 		@Override
 		public String toString() {
-			return "Schedule [TBA]";
+			return "TBA";
 		}
 	};
 
@@ -53,7 +53,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [" + days + " " + period + "]";
+		return days + " " + period;
 	}
 
 }
