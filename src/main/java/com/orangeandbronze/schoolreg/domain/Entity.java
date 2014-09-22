@@ -13,7 +13,7 @@ package com.orangeandbronze.schoolreg.domain;
  **/
 public abstract class Entity {
 
-	/** Should be set by reflection. **/
-	protected final Long primaryKey = null;
+	/** Should be set by reflection. Default to zero. **/
+	protected final long primaryKey = 0;
 
 }
