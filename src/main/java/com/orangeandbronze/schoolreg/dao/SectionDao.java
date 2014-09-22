@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.orangeandbronze.schoolreg.domain.Days;
+import com.orangeandbronze.schoolreg.domain.Faculty;
 import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
@@ -44,30 +45,41 @@ public class SectionDao {
 	}
 
 	public Section getById(String sectionNumber) {
-		String sqlSection = "SELECT * FROM sections WHERE section_number= ? ";
-		String sqlSubject = "SELECT * FROM subjects WHERE subjects.pk = ? ";
-		String sqlFaculty = "SELECT * FROM faculty WHERE faculty.pk = ? ";
+		
+		String sql = "SELECT sections.*, subjects.subject_id, faculty.faculty_number FROM sections " +
+		"INNER JOIN subjects ON sections.fk_subject = subjects.pk " +
+		"INNER JOIN faculty ON sections.fk_faculty = faculty.pk WHERE section_number = ? ";
 		
 		Section section = null;
 		
 		try (Connection conn = getConnection()) {
-			PreparedStatement pstmtSection = conn.prepareStatement(sqlSection);
-			pstmtSection.setString(1, sectionNumber);
-			ResultSet rsSection = pstmtSection.executeQuery();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sectionNumber);
+			ResultSet rs = pstmt.executeQuery();
 						
-			while(rsSection.next()) {
-				long pk = rsSection.getInt("pk");
-				int fkSubject = rsSection.getInt("fk_subject");
-				int fkFaculty = rsSection.getInt("fk_faculty");
-				String scheduleString = rsSection.getString("schedule");				
+			while(rs.next()) {
+				long pk = rs.getInt("pk");
+				long fkSubject = rs.getInt("fk_subject");
+				long fkFaculty = rs.getInt("fk_faculty");
+				String scheduleString = rs.getString("schedule");				
+				String subjectId = rs.getString("subject_id");
+				int facultyNum = rs.getInt("faculty_number");
 				
-				PreparedStatement pstmtSubject = conn.prepareStatement(sqlSubject);
-				pstmtSubject.setInt(1, fkSubject);
-				ResultSet rsSubject = pstmtSubject.executeQuery();
+				Subject subject = new Subject(subjectId);
+				// Set private key so we can map it to a DB row later on for saving/updating.
+				Field subjectPk = Subject.class.getSuperclass().getDeclaredField("primaryKey");	
+				subjectPk.setAccessible(true);
+				subjectPk.set(subject, fkSubject);
 				
-				Subject subject = null;
-				while (rsSubject.next()) {
-					subject = new Subject(rsSubject.getString("subject_id"));
+				Faculty faculty = null;
+				if (fkFaculty != 0) {	// not TBA
+					faculty = new Faculty(facultyNum);
+					// Set private key so we can map it to a DB row later on for saving/updating.
+					Field facultyPk = Subject.class.getSuperclass().getDeclaredField("primaryKey");	
+					facultyPk.setAccessible(true);
+					facultyPk.set(faculty, fkFaculty);
+				} else {
+					faculty = Faculty.TBA;
 				}
 				
 				String[] dayPeriod = scheduleString.split("\\s+");
@@ -77,8 +89,6 @@ public class SectionDao {
 				sectionPk.setAccessible(true);
 				sectionPk.set(section, pk);
 			}
-			
-			
 		} catch (SQLException e) {
 			throw new DataAccessException("Something happend while trying to fetch Section data", e);
 		} catch (ReflectiveOperationException e) {
@@ -86,6 +96,7 @@ public class SectionDao {
 		}
 		
 		return section;
+		
 	}
 
 	public Set<Section> getAll() {
