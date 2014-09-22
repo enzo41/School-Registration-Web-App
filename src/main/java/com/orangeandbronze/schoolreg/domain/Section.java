@@ -6,7 +6,7 @@ import java.util.Set;
 public class Section extends Entity {
 	
 	public final static Section DOES_NOT_EXIST = new Section("Does Not Exist", null);
-
+//	private final Long primaryKey = null;
 	private final String sectionNumber;
 	private final Subject subject;
 	private Faculty instructor;
