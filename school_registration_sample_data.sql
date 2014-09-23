@@ -21,6 +21,14 @@ insert into subjects (pk, subject_id) values (3, 'MA3');
 insert into subjects (pk, subject_id) values (4, 'EN1');
 insert into subjects (pk, subject_id) values (5, 'EN2');
 
+-- sections sample data
+insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) values (1, 'MA110MTAM', 1, 1, 'MTH AM10');
+insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) values (2, 'MA220TFPM', 2, 2, 'TF PM4');
+insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) values (3, 'MA330WSAM', 3, 3, 'WS AM1130');
+insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) values (4, 'EN1040MTAM', 4, 4, 'MTH AM10');
+insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) values (5, 'EN2050TFPM', 5, 5, 'TF PM1');
+
+
 
 -- subject_prerequisites sample data
 insert into subject_prerequisites (pk, fk_subject, fk_prerequisite) values (1, 3, 1);
