@@ -40,9 +40,9 @@ public class SectionCreationService {
 	public List<Period> fetchPeriodList(){
 		
 		List<Period> periodList = new ArrayList<>();
+		periodList.add(Period.AM830);
 		periodList.add(Period.AM10);
 		periodList.add(Period.AM1130);
-		periodList.add(Period.AM830);
 		periodList.add(Period.PM1);
 		periodList.add(Period.PM230);
 		periodList.add(Period.PM4);

@@ -25,6 +25,19 @@
 </c:forEach>
 </select>
 </p>
+<p>Schedule: Day
+<select name="day">
+<c:forEach var="day" items="${daysList}">
+ <option value="${ day }"> ${ day }</option>
+</c:forEach>
+</select>
+Period
+<select name="period">
+<c:forEach var="period" items="${periodList}">
+ <option value="${ period }"> ${ period }</option>
+</c:forEach>
+</select>
+</p>
 <input type="submit" value="Submit">
 </form>
 </body>

@@ -41,7 +41,7 @@ public class SectionCreationServlet extends HttpServlet {
 		session.setAttribute("facultyList", facultyList);
 		session.setAttribute("subjectList", subjectList);
 		session.setAttribute("daysList", daysList);
-		session.setAttribute("preiodList", periodList);
+		session.setAttribute("periodList", periodList);
 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/sectionCreation.jsp");
