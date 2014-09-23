@@ -29,7 +29,7 @@ public class SectionCreationService {
 	
 	public List<Days> fetchDaysList(){
 		
-		List<Days> daysList = null;
+		List<Days> daysList = new ArrayList<>();
 		daysList.add(Days.MTH);
 		daysList.add(Days.TF);
 		daysList.add(Days.WS);
@@ -39,7 +39,7 @@ public class SectionCreationService {
 	
 	public List<Period> fetchPeriodList(){
 		
-		List<Period> periodList = null;
+		List<Period> periodList = new ArrayList<>();
 		periodList.add(Period.AM10);
 		periodList.add(Period.AM1130);
 		periodList.add(Period.AM830);
