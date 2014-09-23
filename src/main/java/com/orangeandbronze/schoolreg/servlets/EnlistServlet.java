@@ -28,12 +28,18 @@ public class EnlistServlet extends HttpServlet {
 		Integer studentNumber = ((User) session.getAttribute("user")).getUserId();
 		
 		// send section numbers to service, return with list of successfully enlisted & not successfully enlisted sections... for not successfully enlisted, state why
+		try{
 		EnlistmentResult result = service.enlistSections(studentNumber, sectionNumbers);
 
 		// send insert result in session, forward to a JSP page; implements Post-Redirect-Get pattern
 		session.setAttribute("result", result);
 		response.sendRedirect(getServletContext().getContextPath() + "/enlistmentResult.jsp");
-		
+		}
+		// added try and catch for null data or no section selected to loop in showSections
+		catch(NullPointerException e){
+		session.setAttribute("noSection", true);
+		response.sendRedirect(getServletContext().getContextPath() + "/showSections");
+		}
 	}
 
 }
