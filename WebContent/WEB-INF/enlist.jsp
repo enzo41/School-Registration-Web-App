@@ -11,6 +11,7 @@
 	<div>You are logged in as ${ user.name }, with User ID ${ user.userId }
 		and type ${ user.type }.</div>
 	<h1>Enlist in Sections</h1>
+	<%-- Testing of catching null --%>
 	<form action="enlist" method="post">
 
 		<h2>Choose Your Sections</h2>
@@ -22,8 +23,15 @@
 				
 		</c:forEach>
 		</table>
+		<p>
+		<c:if test="${noSection}">
+   			<small><font color="red">
+     			Note: You must enlist at least one section.
+   			</font></small>
+  		</c:if>
+		</p>
 		<div>
-			<input type="submit" value="Submit">
+			<input type="submit" value="Enlist">
 		</div>
 	</form>
 </body>
