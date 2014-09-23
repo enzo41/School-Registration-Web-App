@@ -1,5 +1,3 @@
-Hello, Karl!!
-
 School-Registration-Web-App
 ===========================
 
@@ -38,8 +36,3 @@ If you would like to use Eclipse with this project, note that you will need to c
  * MySQL DDL
  * Error Pages
  * Move some JSPs to WEB-INF for better control
-
-# Analysis
-
-I ran the code through Spoiklin Soice to do a graphical representation of the dependencies. Pretty clean, don't you think? I plan to do some other static analysis later on, maybe using SonarQube.
-![](spoiklin.png)
