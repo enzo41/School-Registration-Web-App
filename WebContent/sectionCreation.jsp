@@ -18,6 +18,13 @@
 </c:forEach>
 </select>
 </p>
+<p>Subject:
+<select name="subjectId">
+<c:forEach var="subject" items="${subjectList}">
+ <option value="${ subject.subjectId }"> ${ subject.subjectId }</option>
+</c:forEach>
+</select>
+</p>
 <input type="submit" value="Submit">
 </form>
 </body>

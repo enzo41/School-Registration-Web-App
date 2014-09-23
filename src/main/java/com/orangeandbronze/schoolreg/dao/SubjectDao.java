@@ -8,6 +8,4 @@ public interface SubjectDao {
 	
 	List<Subject> fetchAllSubject();
 	
-	
-
 }

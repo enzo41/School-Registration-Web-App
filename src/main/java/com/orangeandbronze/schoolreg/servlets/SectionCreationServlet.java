@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.orangeandbronze.schoolreg.domain.Days;
 import com.orangeandbronze.schoolreg.domain.Faculty;
+import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.service.SectionCreationService;
@@ -31,11 +33,15 @@ public class SectionCreationServlet extends HttpServlet {
 		SectionCreationService sectionCreationService = new SectionCreationService();
 		
 		List<Faculty> facultyList = sectionCreationService.fetchFacultyList();
-		List<Subject> subjectList = sectionCreationService.fetchSubjectList();
+		List<Subject> subjectList = sectionCreationService.fetchSubjectList(); 
+		List<Days> daysList = sectionCreationService.fetchDaysList();
+		List<Period> periodList = sectionCreationService.fetchPeriodList();
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("facultyList", facultyList);
 		session.setAttribute("subjectList", subjectList);
+		session.setAttribute("daysList", daysList);
+		session.setAttribute("preiodList", periodList);
 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/sectionCreation.jsp");
