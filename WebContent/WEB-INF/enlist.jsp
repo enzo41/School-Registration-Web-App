@@ -11,22 +11,22 @@
 	<div>You are logged in as ${ user.name }, with User ID ${ user.userId }
 		and type ${ user.type }.</div>
 	<h1>Enlist in Sections</h1>
-	<%-- Testing of catching null --%>
 	<form action="enlist" method="post">
 
 		<h2>Choose Your Sections</h2>
 		<table border="1">
 		<tr><td></td><td>Section Number</td><td>Subject</td><td>Schedule</td></tr>
 			<c:forEach var="section" items="${sections}">
-			<tr><td><input type="checkbox" name="sectionNumber"
+			<tr><td><input type="radio" name="sectionNumber"
 					value="${section.sectionNumber }"></td><td>${section.sectionNumber }</td><td>${section.subject.subjectId }</td><td>${section.schedule.days } ${section.schedule.period }</td></tr>
 				
 		</c:forEach>
 		</table>
+		<%--Catching of no section selected --%>
 		<p>
 		<c:if test="${noSection}">
    			<small><font color="red">
-     			Note: You must enlist at least one section.
+     			Note: You must enlist at least one section.<br>
    			</font></small>
   		</c:if>
 		</p>
