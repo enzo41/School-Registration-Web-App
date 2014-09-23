@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.orangeandbronze.schoolreg.domain.Faculty;
+import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.service.SectionCreationService;
 
@@ -37,7 +38,7 @@ public class SectionCreationServlet extends HttpServlet {
 		session.setAttribute("subjectList", subjectList);
 
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/sectionCreation.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/sectionCreation.jsp");
 		dispatcher.forward(request, response);
 		
 	}
@@ -48,16 +49,27 @@ public class SectionCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String facultyNumber = request.getParameter("facultyNumber");
-		
+		SectionCreationService sectionCreationService = new SectionCreationService();
+		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability();
 		HttpSession session = request.getSession();
-		List<Faculty> facultyList = (List<Faculty>) session.getAttribute("facultyList");
-		for(Faculty faculty: facultyList){
-			if(faculty.equals(new Integer(facultyNumber))){
-				session.setAttribute("faculty", faculty);
-				break;
+		
+		if(isTeacherScheduleAvailable){
+			sectionCreationService.createSection();
+
+			List<Faculty> facultyList = (List<Faculty>) session.getAttribute("facultyList");
+			for(Faculty faculty: facultyList){
+				if(faculty.equals(new Integer(facultyNumber))){
+					session.setAttribute("faculty", faculty);
+					break;
+				}
 			}
+		}else{
+			//Teacher is unavailable with the specified schedule. Teacher is assigned to SECTION.
+			
 		}
-		response.sendRedirect("/WEB-INF/jsp/sectionCreationResult.jsp");
+		
+		response.sendRedirect("/school-registration-web-app/sectionCreationResult.jsp");
+		
 	}
 
 }
