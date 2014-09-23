@@ -20,9 +20,7 @@ public class FacultyDaoImpl extends Dao implements FacultyDao{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
-
 			while (rs.next()) {
-				
 				int facultyNumber = rs.getInt("faculty_number");
 				Faculty faculty = new Faculty(facultyNumber);
 				facultyList.add(faculty);
