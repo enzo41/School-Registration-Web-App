@@ -23,6 +23,11 @@ public class Section extends Entity {
 		this(sectionNumber, subject);
 		this.schedule = schedule;
 	}
+	
+	public Section(String sectionNumber, Subject subject, Schedule schedule, Faculty instructor) {
+		this(sectionNumber, subject, schedule);
+		this.instructor = instructor;
+	}
 
 	public String getSectionNumber() {
 		return sectionNumber;

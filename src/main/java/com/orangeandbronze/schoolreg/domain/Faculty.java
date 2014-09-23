@@ -2,7 +2,7 @@ package com.orangeandbronze.schoolreg.domain;
 
 public class Faculty extends Entity {
 
-	static final Faculty TBA = new Faculty(null) {
+	public static final Faculty TBA = new Faculty(0) {
 
 		@Override
 		public String toString() {

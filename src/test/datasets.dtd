@@ -1,0 +1,66 @@
+<!ELEMENT dataset (
+    enrollment_sections*,
+    enrollments*,
+    faculty*,
+    sections*,
+    student_enrollments*,
+    students*,
+    subject_prerequisites*,
+    subjects*)>
+
+<!ELEMENT enrollment_sections EMPTY>
+<!ATTLIST enrollment_sections
+    pk CDATA #REQUIRED
+    fk_enrollment CDATA #IMPLIED
+    fk_sections CDATA #IMPLIED
+>
+
+<!ELEMENT enrollments EMPTY>
+<!ATTLIST enrollments
+    pk CDATA #REQUIRED
+    enrollment_number CDATA #IMPLIED
+    fk_students CDATA #IMPLIED
+    term CDATA #IMPLIED
+>
+
+<!ELEMENT faculty EMPTY>
+<!ATTLIST faculty
+    pk CDATA #REQUIRED
+    faculty_number CDATA #IMPLIED
+>
+
+<!ELEMENT sections EMPTY>
+<!ATTLIST sections
+    pk CDATA #REQUIRED
+    section_number CDATA #IMPLIED
+    fk_subject CDATA #IMPLIED
+    fk_faculty CDATA #IMPLIED
+    schedule CDATA #IMPLIED
+>
+
+<!ELEMENT student_enrollments EMPTY>
+<!ATTLIST student_enrollments
+    pk CDATA #REQUIRED
+    fk_student CDATA #IMPLIED
+    fk_enrollment CDATA #IMPLIED
+>
+
+<!ELEMENT students EMPTY>
+<!ATTLIST students
+    pk CDATA #REQUIRED
+    student_number CDATA #IMPLIED
+>
+
+<!ELEMENT subject_prerequisites EMPTY>
+<!ATTLIST subject_prerequisites
+    pk CDATA #REQUIRED
+    fk_subject CDATA #IMPLIED
+    fk_prerequisite CDATA #IMPLIED
+>
+
+<!ELEMENT subjects EMPTY>
+<!ATTLIST subjects
+    pk CDATA #REQUIRED
+    subject_id CDATA #IMPLIED
+>
+
