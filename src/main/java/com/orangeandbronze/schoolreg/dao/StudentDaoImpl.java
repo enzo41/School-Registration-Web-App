@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.orangeandbronze.schoolreg.domain.Student;
-import com.orangeandbronze.schoolreg.dao.StudentDao;
 
-public class StudentDaoImpl extends Dao implements StudentDao {
+/*public class StudentDaoImpl extends Dao implements StudentDaoS {
 	
 	// Getting the list of Students for the Login
 	
@@ -38,5 +37,11 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 		return null;
 	}
 
-}
+	@Override
+	public Student getById() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+}
+*/
