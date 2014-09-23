@@ -42,7 +42,6 @@ public class SectionCreationServlet extends HttpServlet {
 		session.setAttribute("subjectList", subjectList);
 		session.setAttribute("daysList", daysList);
 		session.setAttribute("periodList", periodList);
-
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/sectionCreation.jsp");
 		dispatcher.forward(request, response);
@@ -55,6 +54,10 @@ public class SectionCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String facultyNumber = request.getParameter("facultyNumber");
+		String subjectId = request.getParameter("subjectId");
+		String day = request.getParameter("day");
+		String period = request.getParameter("period");
+		
 		SectionCreationService sectionCreationService = new SectionCreationService();
 		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability();
 		HttpSession session = request.getSession();

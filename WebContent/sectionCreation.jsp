@@ -11,6 +11,7 @@
 <h1>Section Creation</h1>
 <h2>Please select teacher, subject, and schedule</h2>
 <form action="${pageContext.request.contextPath}/SectionCreation" method="post">
+Section Number:<input type="text" size="20" name="sectionNumber"><br>
 <p>Teacher:
 <select name="facultyNumber">
 <c:forEach var="faculty" items="${facultyList}">
