@@ -3,24 +3,25 @@ package com.orangeandbronze.schoolreg.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orangeandbronze.schoolreg.dao.FacultyDao;
+import com.orangeandbronze.schoolreg.dao.FacultyDaoImpl;
+import com.orangeandbronze.schoolreg.dao.SubjectDao;
+import com.orangeandbronze.schoolreg.dao.SubjectDaoImpl;
 import com.orangeandbronze.schoolreg.domain.Faculty;
-import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
 
 public class SectionCreationService {
 	
+	FacultyDao facultyDao = new FacultyDaoImpl();
+	SubjectDao subjectDao = new SubjectDaoImpl();
+	
 	public List<Faculty> fetchFacultyList(){
-		List<Faculty> facultyList = new ArrayList<>();
-		
-		//Remove 2 lines below because these are test purpose
-		Faculty faculty = new Faculty(new Integer(1));
-		facultyList.add(faculty);
-		
+		List<Faculty> facultyList = facultyDao.fetchAllFaculty();
 		return facultyList;
 	};
 	
 	public List<Subject> fetchSubjectList(){
-		List<Subject> subjectList = new ArrayList<>();
+		List<Subject> subjectList = subjectDao.fetchAllSubject();
 		return subjectList;
 	};
 	
