@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.orangeandbronze.schoolreg.domain.Entity;
 import com.orangeandbronze.schoolreg.domain.Section;
 
+/** Layer Supertype for all Daos, to hold common code. **/
 public class Dao {
 
 	public Dao() {
