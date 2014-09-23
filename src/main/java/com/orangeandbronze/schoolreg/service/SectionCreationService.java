@@ -5,12 +5,15 @@ import java.util.List;
 
 import com.orangeandbronze.schoolreg.dao.FacultyDao;
 import com.orangeandbronze.schoolreg.dao.FacultyDaoImpl;
+import com.orangeandbronze.schoolreg.dao.SectionDao;
 import com.orangeandbronze.schoolreg.dao.SubjectDao;
 import com.orangeandbronze.schoolreg.dao.SubjectDaoImpl;
-import com.orangeandbronze.schoolreg.domain.Faculty;
-import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.domain.Days;
+import com.orangeandbronze.schoolreg.domain.Faculty;
 import com.orangeandbronze.schoolreg.domain.Period;
+import com.orangeandbronze.schoolreg.domain.Schedule;
+import com.orangeandbronze.schoolreg.domain.Section;
+import com.orangeandbronze.schoolreg.domain.Subject;
 
 public class SectionCreationService {
 	
@@ -51,15 +54,28 @@ public class SectionCreationService {
 		
 	}
 	
-	
-	
-	
-	public boolean checkTeacherScheduleAvailability(){
-		return true;
+	public boolean checkTeacherScheduleAvailability(int facultyNumber, Schedule schedule){
+		
+		SectionDao sectionDao = new SectionDao();
+		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
+		
+		if(section == null){
+			return false;
+		} else{
+			return true;
+		}
 	}
 	
-	public void createSection(){
-		//Implement insert statement later
+	public void createSection(String sectionNumber, int facultyNumber, String subjectId, Schedule schedule){
+		
+		SectionDao sectionDao = new SectionDao();
+		
+		int currenetMaxPkNumber = sectionDao.getMaxPkNumber();
+		int subjectPk = subjectDao.getPkBySubjectId();
+		int facultyPk = facultyDao.getPkByFacultyNumber();
+		
+		sectionDao.createSection((currenetMaxPkNumber+1), sectionNumber, subjectPk, facultyPk, schedule.toString());
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import com.orangeandbronze.schoolreg.domain.Faculty;
 public interface FacultyDao {
 	
 	List<Faculty> fetchAllFaculty();
+	int getPkByFacultyNumber();
 	
 
 }

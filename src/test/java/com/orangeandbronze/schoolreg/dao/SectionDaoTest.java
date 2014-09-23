@@ -76,5 +76,26 @@ public class SectionDaoTest extends DBTestCase {
 		
 		
 	}
+	
+	public void testFetchSectionByFacultyNumberAndScheduleResultNotNull(){
+		SectionDao sectionDao = new SectionDao();
+		int facultyNumber = 10;
+		Schedule schedule = new Schedule(Days.MTH, Period.AM10);
+		
+		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
+		
+		assertNotNull(section);
+	}
+	
+	public void testFetchSectionByFacultyNumberAndScheduleResultNull(){
+		SectionDao sectionDao = new SectionDao();
+		int facultyNumber = 9999;
+		Schedule schedule = new Schedule(Days.MTH, Period.AM10);
+		
+		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
+		
+		assertNull(section);
+	}
+	
 
 }

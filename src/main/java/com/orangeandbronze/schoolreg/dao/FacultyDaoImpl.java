@@ -11,6 +11,7 @@ import com.orangeandbronze.schoolreg.domain.Faculty;
 
 public class FacultyDaoImpl extends Dao implements FacultyDao{	
 	
+	@Override
 	public List<Faculty> fetchAllFaculty(){
 		
 		String sql = "select pk, faculty_number from faculty";
@@ -31,6 +32,12 @@ public class FacultyDaoImpl extends Dao implements FacultyDao{
 
 		return facultyList;
 		
+	}
+
+	@Override
+	public int getPkByFacultyNumber() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

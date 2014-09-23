@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.orangeandbronze.schoolreg.domain.Days;
 import com.orangeandbronze.schoolreg.domain.Faculty;
 import com.orangeandbronze.schoolreg.domain.Period;
+import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.service.SectionCreationService;
@@ -53,17 +54,19 @@ public class SectionCreationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String facultyNumber = request.getParameter("facultyNumber");
+		String sectionNumber = request.getParameter("sectionNumber");
+		Integer facultyNumber = new Integer(request.getParameter("facultyNumber"));
 		String subjectId = request.getParameter("subjectId");
-		String day = request.getParameter("day");
-		String period = request.getParameter("period");
+		Days day = Enum.valueOf (Days.class, request.getParameter("day"));
+		Period period = Enum.valueOf (Period.class, request.getParameter("period"));
+		Schedule schedule = new Schedule(day, period);
 		
 		SectionCreationService sectionCreationService = new SectionCreationService();
-		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability();
+		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability(facultyNumber, schedule);
 		HttpSession session = request.getSession();
 		
 		if(isTeacherScheduleAvailable){
-			sectionCreationService.createSection();
+			sectionCreationService.createSection(sectionNumber, facultyNumber, subjectId, schedule);
 
 			List<Faculty> facultyList = (List<Faculty>) session.getAttribute("facultyList");
 			for(Faculty faculty: facultyList){

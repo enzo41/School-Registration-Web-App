@@ -1,6 +1,11 @@
 <!DOCTYPE dataset SYSTEM "src/test/datasets.dtd">
 <dataset>
-    <faculty pk="0"  faculty_number="0"/>	
+    <faculty pk="0"  faculty_number="0"/>
+    <faculty pk="1"  faculty_number="10"/>
+    <faculty pk="2"  faculty_number="20"/>
+    <faculty pk="3"  faculty_number="30"/>
+    <faculty pk="4"  faculty_number="40"/>
+    <faculty pk="5"  faculty_number="50"/>
 
 	<subjects pk="1"  subject_id="MATH11"/>
 	<subjects pk="2"  subject_id="MATH14"/>
@@ -9,9 +14,19 @@
 	<subjects pk="5"  subject_id="CS11"/>
 	<subjects pk="6"  subject_id="COM1"/>
 	<subjects pk="7"  subject_id="PHILO1"/>
+	<subjects pk="8"  subject_id="MA1"/>
+	<subjects pk="9"  subject_id="MA2"/>
+	<subjects pk="10"  subject_id="MA3"/>
+	<subjects pk="11"  subject_id="EN1"/>
+	<subjects pk="12"  subject_id="EN2"/>
+	
 
 	<subject_prerequisites pk="1" fk_subject="3" fk_prerequisite="1"/>
 	<subject_prerequisites pk="2" fk_subject="3" fk_prerequisite="2"/>
+	<subject_prerequisites pk="3" fk_subject="10" fk_prerequisite="8"/>
+	<subject_prerequisites pk="4" fk_subject="10" fk_prerequisite="9"/>
+	<subject_prerequisites pk="5" fk_subject="12" fk_prerequisite="11"/>
+	
 	
     <sections pk="1"  section_number="AAA111"  fk_subject="3"   fk_faculty="0"   schedule="MTH AM10"/>
     <sections pk="2"  section_number="BBB222"  fk_subject="6"   fk_faculty="0"   schedule="TBA"/>
@@ -20,5 +35,12 @@
     <sections pk="5"  section_number="EEE555"  fk_subject="5"   fk_faculty="0"   schedule="TBA"/>
     <sections pk="6"  section_number="GGG777"  fk_subject="1"   fk_faculty="0"   schedule="TBA"/>
     <sections pk="7"  section_number="ZZZ000"  fk_subject="4"   fk_faculty="0"   schedule="TF PM4"/>
+	<sections pk="8"  section_number="MA110MTAM"  fk_subject="1"   fk_faculty="1"   schedule="MTH AM10"/>
+	<sections pk="9"  section_number="MA220TFPM"  fk_subject="2"   fk_faculty="2"   schedule="TF PM4"/>
+	<sections pk="10"  section_number="MA330WSAM"  fk_subject="3"   fk_faculty="3"   schedule="WS AM1130"/>
+	<sections pk="11"  section_number="EN1040MTAM"  fk_subject="4"   fk_faculty="4"   schedule="MTH AM10"/>
+	<sections pk="12"  section_number="EN2050TFPM"  fk_subject="5"   fk_faculty="5"   schedule="TF PM1"/>
+
+    
 
 </dataset>

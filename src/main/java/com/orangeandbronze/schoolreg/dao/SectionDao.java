@@ -133,5 +133,48 @@ public class SectionDao extends Dao {
 
 		return sections;
 	}
+	
+	public Section fetchSectionByFacultyNumberAndSchedule(int facultyNumber, Schedule schedule){
+		
+		String sql = "select	sc.section_number, " +
+					 			"sb.subject_id " +
+					 "from		sections	sc, " +
+					 			"faculty	fc, " +
+					 			"subjects	sb " +
+					 "where		sc.schedule = ? " +
+					 "and		fc.pk	=	sc.fk_faculty " +
+					 "and		fc.faculty_number = ? " +
+					 "and		sb.pk	=	sc.fk_subject"; 
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, schedule.toString());
+			pstmt.setInt(2, facultyNumber);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()){
+				String sectionNumber = rs.getString("section_number");
+				Subject subject = new Subject(rs.getString("subject_id"));
+				Section section = new Section(sectionNumber, subject, schedule, new Faculty(facultyNumber));
+				
+				return section;
+			} else {
+				return null;
+			}	
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+	}
+	
+	public int getMaxPkNumber(){
+		//Need to implementation
+		return 0;
+	}
+	
+	public void createSection(int pk, String sectionNumber, int subjectPk, int facultyPk, String scheduleString){
+		
+	}
+	
+	
 
 }

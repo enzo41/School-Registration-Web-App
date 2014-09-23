@@ -33,5 +33,11 @@ public class SubjectDaoImpl extends Dao implements SubjectDao {
 	return subjectList;
 	}
 
+	@Override
+	public int getPkBySubjectId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
 
