@@ -66,13 +66,22 @@ public class SectionCreationService {
 		}
 	}
 	
-	public void createSection(String sectionNumber, int facultyNumber, String subjectId, Schedule schedule){
+	public void createSection(String sectionNumber, int facultyNumber, String subjectId, Schedule schedule) throws DataNotFoundException{
 		
 		SectionDao sectionDao = new SectionDao();
 		
-		int currenetMaxPkNumber = sectionDao.getMaxPkNumber();
-		int subjectPk = subjectDao.getPkBySubjectId();
-		int facultyPk = facultyDao.getPkByFacultyNumber();
+		Integer currenetMaxPkNumber = sectionDao.getMaxPk();
+		if(currenetMaxPkNumber == null){
+			currenetMaxPkNumber = 0;
+		}
+		
+		Integer subjectPk = subjectDao.getPkBySubjectId(subjectId);
+		Integer facultyPk = facultyDao.getPkByFacultyNumber(facultyNumber);
+		
+		if((subjectPk == null) || (facultyPk == null)){
+			String errorMessage = "Sorry for your inconvenience";
+			throw new DataNotFoundException(errorMessage);
+		}
 		
 		sectionDao.createSection((currenetMaxPkNumber+1), sectionNumber, subjectPk, facultyPk, schedule.toString());
 		

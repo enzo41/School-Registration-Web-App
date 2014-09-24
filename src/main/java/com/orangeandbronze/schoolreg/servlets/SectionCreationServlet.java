@@ -17,6 +17,7 @@ import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
+import com.orangeandbronze.schoolreg.service.DataNotFoundException;
 import com.orangeandbronze.schoolreg.service.SectionCreationService;
 
 /**
@@ -66,7 +67,12 @@ public class SectionCreationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(isTeacherScheduleAvailable){
-			sectionCreationService.createSection(sectionNumber, facultyNumber, subjectId, schedule);
+			try {
+				sectionCreationService.createSection(sectionNumber, facultyNumber, subjectId, schedule);
+			} catch (DataNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			List<Faculty> facultyList = (List<Faculty>) session.getAttribute("facultyList");
 			for(Faculty faculty: facultyList){

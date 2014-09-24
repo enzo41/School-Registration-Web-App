@@ -34,9 +34,27 @@ public class SubjectDaoImpl extends Dao implements SubjectDao {
 	}
 
 	@Override
-	public int getPkBySubjectId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Integer getPkBySubjectId(String subjectId) {
+		
+		String sql = "select pk from subjects where subject_id = ?";
+		Integer pk;
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subjectId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				pk = rs.getInt(1); 
+			} else{
+				pk = null;
+			}
+	
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return pk;
 	}
 
 }

@@ -97,5 +97,15 @@ public class SectionDaoTest extends DBTestCase {
 		assertNull(section);
 	}
 	
+	
+	public void testGetMacPkExistRecordsInSections(){
+		SectionDao sectionDao = new SectionDao();
+		
+		int maxPk = sectionDao.getMaxPk();
+		
+		assertEquals(12 , maxPk);
+		
+	}
+	
 
 }

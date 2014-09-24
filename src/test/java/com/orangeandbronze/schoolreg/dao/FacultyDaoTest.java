@@ -18,5 +18,14 @@ public class FacultyDaoTest {
 		
 		assertEquals(5, facultyList.size());
 	}
+	
+	@Test
+	public void testGetPkByFacultyNumber(){
+		
+		FacultyDao facultyDao = new FacultyDaoImpl();
+		int pk = facultyDao.getPkByFacultyNumber(50);
+		
+		assertEquals(5, pk);
+	}
 
 }

@@ -7,5 +7,6 @@ import com.orangeandbronze.schoolreg.domain.Subject;
 public interface SubjectDao {
 	
 	List<Subject> fetchAllSubject();
-	int	getPkBySubjectId();
+	Integer	getPkBySubjectId(String subjectId);
+	
 }

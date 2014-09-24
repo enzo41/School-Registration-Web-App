@@ -16,7 +16,16 @@ public class SubjectDaoTest {
 		SubjectDao subjectDao = new SubjectDaoImpl();
 		List<Subject> subjectList = subjectDao.fetchAllSubject();
 		
-		assertEquals(5, subjectList.size());
+		assertEquals(12, subjectList.size());
+	}
+	
+	@Test
+	public void testGetPkBySubjectId(){
+		
+		SubjectDao subjectDao = new SubjectDaoImpl();
+		int pk = subjectDao.getPkBySubjectId("EN2");
+		
+		assertEquals(12, pk);
 	}
 
 }

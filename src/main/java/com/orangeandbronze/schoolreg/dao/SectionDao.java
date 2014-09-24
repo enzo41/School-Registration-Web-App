@@ -166,9 +166,25 @@ public class SectionDao extends Dao {
 		}
 	}
 	
-	public int getMaxPkNumber(){
-		//Need to implementation
-		return 0;
+	public Integer getMaxPk(){
+		
+		String sql = "select max(pk) from sections";
+		Integer maxPk;
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				maxPk = rs.getInt(1); 
+			} else{
+				maxPk = null;
+			}
+			 
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return maxPk;
 	}
 	
 	public void createSection(int pk, String sectionNumber, int subjectPk, int facultyPk, String scheduleString){

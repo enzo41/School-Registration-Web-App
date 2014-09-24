@@ -35,9 +35,26 @@ public class FacultyDaoImpl extends Dao implements FacultyDao{
 	}
 
 	@Override
-	public int getPkByFacultyNumber() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Integer getPkByFacultyNumber(int facultyNumber) {
+		String sql = "select pk from faculty where faculty_number = ?";
+		Integer pk;
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, facultyNumber);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				pk = rs.getInt(1); 
+			} else{
+				pk = null;
+			}
+	
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return pk;
 	}
 
 }
