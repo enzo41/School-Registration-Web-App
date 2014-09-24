@@ -64,6 +64,7 @@ CREATE TABLE `enrollments` (
   `fk_students` int(11) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pk`),
+  UNIQUE KEY `enrollments_idx_01` (`enrollment_number`),
   KEY `fk_students` (`fk_students`),
   CONSTRAINT `enrollments_ibfk_1` FOREIGN KEY (`fk_students`) REFERENCES `students` (`pk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -88,7 +89,8 @@ DROP TABLE IF EXISTS `faculty`;
 CREATE TABLE `faculty` (
   `pk` int(11) NOT NULL,
   `faculty_number` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pk`)
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `faculty_idx_01` (`faculty_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,6 +117,7 @@ CREATE TABLE `sections` (
   `fk_faculty` int(11) DEFAULT NULL,
   `schedule` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pk`),
+  UNIQUE KEY `sections_idx_01` (`section_number`),
   KEY `fk_faculty` (`fk_faculty`),
   KEY `fk_subject` (`fk_subject`),
   CONSTRAINT `sections_ibfk_2` FOREIGN KEY (`fk_subject`) REFERENCES `subjects` (`pk`),
@@ -169,7 +172,8 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `pk` int(11) NOT NULL,
   `student_number` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pk`)
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `students_idx_01` (`student_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -220,7 +224,8 @@ DROP TABLE IF EXISTS `subjects`;
 CREATE TABLE `subjects` (
   `pk` int(11) NOT NULL,
   `subject_id` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`pk`)
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `subjects_idx_01` (`subject_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
