@@ -67,6 +67,8 @@ public class SectionCreationServlet extends HttpServlet {
 		SectionCreationService sectionCreationService = new SectionCreationService();
 		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability(facultyNumber, schedule);
 		HttpSession session = request.getSession();
+		session.removeAttribute("createdSession");
+		session.removeAttribute("sectionCreationError");
 		
 		if(isTeacherScheduleAvailable){
 			try {
