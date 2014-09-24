@@ -7,7 +7,7 @@ import com.orangeandbronze.schoolreg.domain.Student;
 public interface StudentDao {
 	
 	List<Student> getAllStudents();
-	Student getById(int studentNumber);
+	Integer getById(int studentNumber);
 	List<Integer> getStudentsInt();
 
 }
