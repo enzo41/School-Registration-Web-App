@@ -8,9 +8,9 @@ import java.util.Set;
 import com.orangeandbronze.schoolreg.dao.EnrollmentDao;
 import com.orangeandbronze.schoolreg.dao.SectionDao;
 import com.orangeandbronze.schoolreg.dao.StudentDao;
+import com.orangeandbronze.schoolreg.dao.StudentDaoImpl;
 import com.orangeandbronze.schoolreg.dao.mock.MockEnrollmentDao;
 import com.orangeandbronze.schoolreg.dao.mock.MockSectionDao;
-import com.orangeandbronze.schoolreg.dao.mock.MockStudentDao;
 import com.orangeandbronze.schoolreg.domain.EnlistmentConflictException;
 import com.orangeandbronze.schoolreg.domain.Enrollment;
 import com.orangeandbronze.schoolreg.domain.MissingPrerequisitesException;
@@ -20,7 +20,7 @@ import com.orangeandbronze.schoolreg.domain.Term;
 
 public class EnlistService {
 
-	private StudentDao studentDao = new MockStudentDao();
+	private StudentDaoImpl studentDao = new StudentDaoImpl();
 	private SectionDao sectionDao = new MockSectionDao();
 	private EnrollmentDao enrollmentDao = new MockEnrollmentDao();
 	
@@ -136,7 +136,7 @@ public class EnlistService {
 
 	}
 
-	void setStudentDao(StudentDao studentDao) {
+	void setStudentDao(StudentDaoImpl studentDao) {
 		this.studentDao = studentDao;
 	}
 
