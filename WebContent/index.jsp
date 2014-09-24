@@ -8,10 +8,7 @@
 <title>Home</title>
 </head>
 <body>
-
-<div>
-You are logged-in as <strong>${ user.name }</strong>, with User ID <strong>${ user.userId }</strong> and type <strong>${ user.type }</strong>.
-</div>
+<jsp:include page="/currentLoginUserInfo.jsp" />
 
 <div>
 <h2>What would you like to do?</h2>

@@ -8,6 +8,7 @@
 <title>Section Creation Result</title>
 </head>
 <body>
+<jsp:include page="/currentLoginUserInfo.jsp" />
 <c:choose>
 	<c:when test = "${empty sectionCreationError }">
 		<h1>Section is created as below:</h1>
