@@ -172,6 +172,7 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `pk` int(11) NOT NULL,
   `student_number` int(11) DEFAULT NULL,
+  `scholarship` varchar(20) DEFAULT NULL, 
   PRIMARY KEY (`pk`),
   UNIQUE KEY `students_idx_01` (`student_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -224,6 +225,7 @@ DROP TABLE IF EXISTS `subjects`;
 CREATE TABLE `subjects` (
   `pk` int(11) NOT NULL,
   `subject_id` varchar(20) DEFAULT NULL,
+  `subject_typ` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pk`),
   UNIQUE KEY `subjects_idx_01` (`subject_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
