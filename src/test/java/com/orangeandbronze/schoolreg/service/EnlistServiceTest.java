@@ -64,7 +64,8 @@ public class EnlistServiceTest {
 		when(enrollmentDao.getBy(student, Term.Y2012_1ST)).thenReturn(previousEnrollment);
 		
 		EnlistService service = new EnlistService();
-		service.setStudentDao(studentDao);
+//		Temporary commentout in order to clear error
+//		service.setStudentDao(studentDao);
 		service.setSectionDao(sectionDao);
 		service.setEnrollmentDao(enrollmentDao);
 		
