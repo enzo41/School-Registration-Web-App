@@ -211,6 +211,19 @@ public class SectionDao extends Dao {
 		
 	}
 	
-	
-
+	public Integer getSectionNumberPk(String sectionNumber){
+		Integer sectionPk=null;
+		String sql = "select pk from sections where section_number = " + sectionNumber;
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			sectionPk = rs.getInt("pk");
+		}
+		catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return sectionPk;
+	}
 }
