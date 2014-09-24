@@ -27,7 +27,7 @@ public class TuitionFeeAssessmentServlet extends HttpServlet {
 		TuitionFeeAssessmentService tuitionFeeAssessmentService = new TuitionFeeAssessmentService();
 		
 		//Check the number of unit if it is over minimum load or not
-		Integer totalUnit = tuitionFeeAssessmentService.getEnlistedTotalUnitOfCurrentTerm();
+		Integer totalUnit = tuitionFeeAssessmentService.getTotalEnlistedUnitsOfCurrentTerm();
 		
 		//Caluculate tuition fee
 		BigDecimal tuitionFee = tuitionFeeAssessmentService.calculateTuitionFeeOfCurrenctTerm();
