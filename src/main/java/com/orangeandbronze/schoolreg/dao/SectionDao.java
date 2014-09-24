@@ -189,6 +189,26 @@ public class SectionDao extends Dao {
 	
 	public void createSection(int pk, String sectionNumber, int subjectPk, int facultyPk, String scheduleString){
 		
+		String sql = "insert into sections (pk, section_number, fk_subject,	fk_faculty,	schedule) " +
+					 "values ( ?, ?, ?, ?, ?)";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pk);
+			pstmt.setString(2, sectionNumber);
+			pstmt.setInt(3, subjectPk);
+			pstmt.setInt(4, facultyPk);
+			pstmt.setString(5, scheduleString);
+			
+			int r = pstmt.executeUpdate();
+			
+			if(r == 0){
+				throw new SQLException();
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
 	}
 	
 	

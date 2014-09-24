@@ -10,6 +10,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 
 import com.orangeandbronze.schoolreg.domain.Days;
+import com.orangeandbronze.schoolreg.domain.Faculty;
 import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
@@ -105,6 +106,19 @@ public class SectionDaoTest extends DBTestCase {
 		
 		assertEquals(12 , maxPk);
 		
+	}
+	
+	public void testCreateSection(){
+		SectionDao sectionDao = new SectionDao();
+		
+		sectionDao.createSection(13, "EN1040WSAM", 11, 4, "WS AM1130");
+		
+		Section section = sectionDao.getById("EN1040WSAM");
+		
+		assertEquals("EN1" , section.getSubject().getSubjectId());
+		assertEquals(new Integer("40") , section.getInstructor().getFacultyNumber());
+		assertEquals("WS AM1130" , section.getSchedule().toString());
+
 	}
 	
 
