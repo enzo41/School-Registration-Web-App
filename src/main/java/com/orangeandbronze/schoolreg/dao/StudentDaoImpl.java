@@ -33,9 +33,22 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 		return studentList;
 }
 
+	//Changed getById to send back pk instead of student_number
+	
 	@Override
 	public Student getById(int studentNumber) {
-		return new Student(studentNumber);
+		String sql = "select pk from students where student_number = " + studentNumber;
+		Student student;
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			Integer studentId = rs.getInt("pk");
+			student = new Student(studentId);
+		}
+		catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		return student;
 	}
 	
 	@Override
