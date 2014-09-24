@@ -36,7 +36,7 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 	//Changed getById to send back pk instead of student_number
 	
 	@Override
-	public Integer getById(int studentNumber) {
+	public Integer getPkById(int studentNumber) {
 		String sql = "select pk from students where student_number = " + studentNumber;
 		Integer studentId;
 		try (Connection conn = getConnection()) {
