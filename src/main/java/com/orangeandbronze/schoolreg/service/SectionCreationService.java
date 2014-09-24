@@ -19,6 +19,7 @@ public class SectionCreationService {
 	
 	FacultyDao facultyDao = new FacultyDaoImpl();
 	SubjectDao subjectDao = new SubjectDaoImpl();
+	SectionDao sectionDao = new SectionDao();
 	
 	public List<Faculty> fetchFacultyList(){
 		List<Faculty> facultyList = facultyDao.fetchAllFaculty();
@@ -56,7 +57,6 @@ public class SectionCreationService {
 	
 	public boolean checkTeacherScheduleAvailability(int facultyNumber, Schedule schedule){
 		
-		SectionDao sectionDao = new SectionDao();
 		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
 		
 		if(section == null){
@@ -66,9 +66,7 @@ public class SectionCreationService {
 		}
 	}
 	
-	public void createSection(String sectionNumber, int facultyNumber, String subjectId, Schedule schedule) throws DataNotFoundException{
-		
-		SectionDao sectionDao = new SectionDao();
+	public Section createSection(String sectionNumber, int facultyNumber, String subjectId, Schedule schedule) throws DataNotFoundException{
 		
 		Integer currenetMaxPkNumber = sectionDao.getMaxPk();
 		if(currenetMaxPkNumber == null){
@@ -84,6 +82,8 @@ public class SectionCreationService {
 		}
 		
 		sectionDao.createSection((currenetMaxPkNumber+1), sectionNumber, subjectPk, facultyPk, schedule.toString());
+		
+		return sectionDao.getById(sectionNumber);
 		
 	}
 

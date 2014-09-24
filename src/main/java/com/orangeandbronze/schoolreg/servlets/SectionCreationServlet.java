@@ -55,6 +55,7 @@ public class SectionCreationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Get request parameters
 		String sectionNumber = request.getParameter("sectionNumber");
 		Integer facultyNumber = new Integer(request.getParameter("facultyNumber"));
 		String subjectId = request.getParameter("subjectId");
@@ -62,28 +63,21 @@ public class SectionCreationServlet extends HttpServlet {
 		Period period = Enum.valueOf (Period.class, request.getParameter("period"));
 		Schedule schedule = new Schedule(day, period);
 		
+		//Check teacher's schedule availability
 		SectionCreationService sectionCreationService = new SectionCreationService();
 		boolean isTeacherScheduleAvailable = sectionCreationService.checkTeacherScheduleAvailability(facultyNumber, schedule);
 		HttpSession session = request.getSession();
 		
 		if(isTeacherScheduleAvailable){
 			try {
-				sectionCreationService.createSection(sectionNumber, facultyNumber, subjectId, schedule);
+				Section section = sectionCreationService.createSection(sectionNumber, facultyNumber, subjectId, schedule);
+				session.setAttribute("createdSection", section);
 			} catch (DataNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			List<Faculty> facultyList = (List<Faculty>) session.getAttribute("facultyList");
-			for(Faculty faculty: facultyList){
-				if(faculty.equals(new Integer(facultyNumber))){
-					session.setAttribute("faculty", faculty);
-					break;
-				}
+				session.setAttribute("sectionCreationError", e.getMessage());
 			}
 		}else{
-			//Teacher is unavailable with the specified schedule. Teacher is assigned to SECTION.
-			
+			String sectionCreationError = "Teacher is unavailable at the specified schedule. Teacher has a class.";
+			session.setAttribute("sectionCreationError", sectionCreationError);
 		}
 		
 		response.sendRedirect("/school-registration-web-app/sectionCreationResult.jsp");
