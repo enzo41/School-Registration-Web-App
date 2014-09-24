@@ -6,6 +6,7 @@ public class TuitionFeeAssessmentService {
 	
 	public Integer getEnlistedTotalUnitOfCurrentTerm(){
 		
+		
 		return 0;
 	}
 	
