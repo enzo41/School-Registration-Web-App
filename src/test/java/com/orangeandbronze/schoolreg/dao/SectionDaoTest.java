@@ -90,8 +90,8 @@ public class SectionDaoTest extends DBTestCase {
 	
 	public void testFetchSectionByFacultyNumberAndScheduleResultNull(){
 		SectionDao sectionDao = new SectionDao();
-		int facultyNumber = 9999;
-		Schedule schedule = new Schedule(Days.MTH, Period.AM10);
+		int facultyNumber = 40;
+		Schedule schedule = new Schedule(Days.MTH, Period.AM830);
 		
 		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
 		

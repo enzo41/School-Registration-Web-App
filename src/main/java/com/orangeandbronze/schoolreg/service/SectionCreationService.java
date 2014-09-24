@@ -60,9 +60,9 @@ public class SectionCreationService {
 		Section section = sectionDao.fetchSectionByFacultyNumberAndSchedule(facultyNumber, schedule);
 		
 		if(section == null){
-			return false;
-		} else{
 			return true;
+		} else{
+			return false;
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class SectionCreationService {
 		Integer facultyPk = facultyDao.getPkByFacultyNumber(facultyNumber);
 		
 		if((subjectPk == null) || (facultyPk == null)){
-			String errorMessage = "Sorry for your inconvenience";
+			String errorMessage = "Sorry for your inconvenience. System admin is taking care of this. Try again in 1 hour.";
 			throw new DataNotFoundException(errorMessage);
 		}
 		
