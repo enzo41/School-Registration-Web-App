@@ -9,12 +9,11 @@ import java.util.List;
 
 import com.orangeandbronze.schoolreg.domain.Student;
 
-/*public class StudentDaoImpl extends Dao implements StudentDaoS {
+public class StudentDaoImpl extends Dao implements StudentDao {
 	
 	// Getting the list of Students for the Login
-	
+	@Override
 	public List<Student> getAllStudents() {
-		List<Student> students = null;
 
 		String sql = "select pk, student_number from students";
 		List<Student> studentList = new ArrayList<>();
@@ -23,25 +22,40 @@ import com.orangeandbronze.schoolreg.domain.Student;
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Integer studentId = rs.getInt("subject_id");
+				Integer studentId = rs.getInt("student_number");
 				Student student = new Student(studentId);
 				studentList.add(student);
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e) {
 			throw new DataAccessException("Something happend while trying to fetch Section data", e);
 		}
 		return studentList;
-	}
-	
-	public Student getStudentById(){
-		return null;
-	}
+}
 
 	@Override
-	public Student getById() {
-		// TODO Auto-generated method stub
-		return null;
+	public Student getById(int studentNumber) {
+		return new Student(studentNumber);
 	}
+	
+	@Override
+	public List<Integer> getStudentsInt() {
 
+		String sql = "select student_number from students";
+		List<Integer> studentList = new ArrayList<>();
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Integer studentId = rs.getInt("student_number");
+				studentList.add(studentId);
+			}
+		}
+		catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		return studentList;
 }
-*/
+}
+
