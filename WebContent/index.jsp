@@ -15,7 +15,7 @@
 <ul>
 	<c:if test="${ user.type == 'STUDENT' }">
 	<li><strong><a href="${pageContext.request.contextPath}/showSections">Enlist Sections</a></strong></li>
-	<%-- <li><strong><a href="${pageContext.request.contextPath}/tuitionFeeAssessment">Tuition Fee Assessment</a></strong></li> --%>
+	<li><strong><a href="${pageContext.request.contextPath}/tuitionFeeAssessment">Tuition Fee Assessment</a></strong></li>
 	</c:if>
 	<c:if test="${ user.type == 'ADMIN' }">
 	<li><strong><a href="${pageContext.request.contextPath}/SectionCreation">Create New Sections</a></strong></li>
