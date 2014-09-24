@@ -6,6 +6,7 @@ import com.orangeandbronze.schoolreg.dao.EnrollmentSectionDao;
 import com.orangeandbronze.schoolreg.dao.EnrollmentSectionDaoImpl;
 import com.orangeandbronze.schoolreg.dao.StudentDao;
 import com.orangeandbronze.schoolreg.dao.StudentDaoImpl;
+import com.orangeandbronze.schoolreg.domain.Student;
 
 public class TuitionFeeAssessmentService {
 	private final int UNIT_PER_SUBJECT = 3;
@@ -17,15 +18,28 @@ public class TuitionFeeAssessmentService {
 	EnrollmentSectionDao enrollmentSectionDao = new EnrollmentSectionDaoImpl();
 	StudentDao studentDao = new StudentDaoImpl();
 	
-	public Integer getTotalEnlistedUnitsOfCurrentTerm(){
+	public boolean checkTotalEnlistedUnitsOfCurrentTermMoreThanMinimumLoad(int studentNumber){
 		
 		Integer numberOfEnlistedSection = enrollmentSectionDao.countEnlistedSection();
 		Integer totalEnlistedUnits = numberOfEnlistedSection * UNIT_PER_SUBJECT;
 		
-//		int academic_year = 
-	
-		return 0;
+		Integer academicYear = studentDao.getAcdemicYearByStudentNumber(studentNumber);
+		boolean isGreaterThanMinimum = false;
+		
+		switch (academicYear) {
+        case 1:  isGreaterThanMinimum = (totalEnlistedUnits > FRESHMEN_MINIMUM_UNITS);
+                 break;
+        case 2:  isGreaterThanMinimum = (totalEnlistedUnits > SOPHOMORE_MINIMUM_UNITS);
+                 break;
+        case 3:  isGreaterThanMinimum = (totalEnlistedUnits > JUNIOR_MINIMUM_UNITS);
+                 break;
+        case 4:  isGreaterThanMinimum = (totalEnlistedUnits > SENIOR_MINIMUM_UNITS);
+                 break;
+		}
+		
+		return isGreaterThanMinimum;
 	}
+	
 	
 	public BigDecimal calculateTuitionFeeOfCurrenctTerm(){
 		

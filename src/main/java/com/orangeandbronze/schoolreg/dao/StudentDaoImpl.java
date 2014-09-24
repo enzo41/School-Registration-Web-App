@@ -69,5 +69,27 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 		}
 		return studentList;
 }
+
+	@Override
+	public Integer getAcdemicYearByStudentNumber(int studentNumber){
+		
+		String studentsQuery = "select academic_year, schorlarship from students where student_number = ?";
+		Integer academicYear = null;
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(studentsQuery);
+			pstmt.setInt(1, studentNumber);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				academicYear = rs.getInt("academic_year");
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return academicYear;
+	}
 }
 
