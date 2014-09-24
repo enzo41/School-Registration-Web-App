@@ -20,5 +20,6 @@
 		<h1>${ sectionCreationError}</h1>
 	</c:otherwise>
 </c:choose>
+<a href="sectionCreation.jsp">Back to Section Creation</a>
 </body>
 </html>
