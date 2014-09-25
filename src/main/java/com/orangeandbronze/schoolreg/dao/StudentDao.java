@@ -9,6 +9,6 @@ public interface StudentDao {
 	List<Student> getAllStudents();
 	Integer getPkById(int studentNumber);
 	List<Integer> getStudentsInt();
-	Integer getAcdemicYearByStudentNumber(int studentNumber);
+	Student getStudentByStudentNumber(int studentNumber);
 
 }

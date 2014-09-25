@@ -28,7 +28,7 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 			}
 		}
 		catch (SQLException e) {
-			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+			throw new DataAccessException("Something happend while trying to fetch Student data", e);
 		}
 		return studentList;
 }
@@ -45,7 +45,7 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 			studentId = rs.getInt("pk");
 		}
 		catch (SQLException e) {
-			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+			throw new DataAccessException("Something happend while trying to fetch Student data", e);
 		}
 		return studentId;
 	}
@@ -65,31 +65,32 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 			}
 		}
 		catch (SQLException e) {
-			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+			throw new DataAccessException("Something happend while trying to fetch Student data", e);
 		}
 		return studentList;
 }
 
 	@Override
-	public Integer getAcdemicYearByStudentNumber(int studentNumber){
+	public Student getStudentByStudentNumber(int studentNumber){
 		
-		String studentsQuery = "select academic_year, schorlarship from students where student_number = ?";
-		Integer academicYear = null;
+		String sql = "select academic_year, scholarship_status from students where student_number = ?";
+		Student student = new Student(studentNumber);
 		
 		try (Connection conn = getConnection()) {
-			PreparedStatement pstmt = conn.prepareStatement(studentsQuery);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, studentNumber);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				academicYear = rs.getInt("academic_year");
+				student.setAcademicYear(rs.getInt("academic_year"));
+				student.setShorlarshipStatus(rs.getString("scholarship_status"));
 			}
 			
 		} catch (SQLException e) {
-			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+			throw new DataAccessException("Something happend while trying to fetch Student data", e);
 		}
 		
-		return academicYear;
+		return student;
 	}
 }
 

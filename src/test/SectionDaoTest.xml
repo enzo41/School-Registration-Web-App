@@ -19,6 +19,9 @@
 	<subjects pk="10"  subject_id="MA3"/>
 	<subjects pk="11"  subject_id="EN1"/>
 	<subjects pk="12"  subject_id="EN2"/>
+	<subjects pk="13"  subject_id="HI1"/>
+	<subjects pk="14"  subject_id="HI2"/>
+	
 	
 
 	<subject_prerequisites pk="1" fk_subject="3" fk_prerequisite="1"/>
@@ -40,6 +43,9 @@
 	<sections pk="10"  section_number="MA330WSAM"  fk_subject="3"   fk_faculty="3"   schedule="WS AM1130"/>
 	<sections pk="11"  section_number="EN1040MTAM"  fk_subject="4"   fk_faculty="4"   schedule="MTH AM10"/>
 	<sections pk="12"  section_number="EN2050TFPM"  fk_subject="5"   fk_faculty="5"   schedule="TF PM1"/>
+	<sections pk="13"  section_number="HI1100WSAM"  fk_subject="6"   fk_faculty="1"   schedule="WS AM1130"/>
+	<sections pk="14"  section_number="HI2100TFPM"  fk_subject="7"   fk_faculty="1"   schedule="TF PM1"/>
+	
 
     
 

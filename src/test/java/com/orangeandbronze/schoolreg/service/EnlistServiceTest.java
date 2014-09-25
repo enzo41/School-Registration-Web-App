@@ -52,7 +52,7 @@ public class EnlistServiceTest {
 		
 		/* Mock the daos */
 		StudentDao studentDao = mock(StudentDao.class);
-		when(studentDao.getById(studentNumber)).thenReturn(student);
+		when(studentDao.getStudentByStudentNumber(studentNumber)).thenReturn(student);
 		SectionDao sectionDao = mock(SectionDao.class);
 		when(sectionDao.getById(sectionNumbers[0])).thenReturn(aaa111);
 		when(sectionDao.getById(sectionNumbers[1])).thenReturn(bbb222);

@@ -42,19 +42,19 @@ public class EnlistService {
 	 */
 	public EnlistmentResult enlistSections(Integer studentNumber, String[] sectionNumbers) {
 		// Fetch domain objects from DB
-//		Student student = studentDao.getById(studentNumber);
+		Student student = studentDao.getStudentByStudentNumber(studentNumber);
 		Section[] sections = new Section[sectionNumbers.length];
 		for (int i = 0; i < sectionNumbers.length; i++) {
 			sections[i] = sectionDao.getById(sectionNumbers[i]);
 		}
-//		Enrollment enrollment = enrollmentDao.getBy(student, Term.getCurrent());
+		Enrollment enrollment = enrollmentDao.getBy(student, Term.getCurrent());
 
 		// delegate work to domain model
 		Set<Section> successfullyEnlisted = new HashSet<>();
 		Map<Section, String> failedToEnlist = new HashMap<>();
 		for (Section section : sections) {
 			try {
-//				enrollment.enlist(section);
+				enrollment.enlist(section);
 				successfullyEnlisted.add(section);
 			} catch (EnlistmentConflictException e) {
 				failedToEnlist.put(section, "Conflict with sections already enlisted.");
@@ -64,7 +64,7 @@ public class EnlistService {
 		}
 
 		// must successfully save result to database before returning result, otherwise, throws DataAccessException
-//		enrollmentDao.save(enrollment);
+		enrollmentDao.save(enrollment);
 		
 		return new EnlistmentResult(successfullyEnlisted, failedToEnlist);
 	}
