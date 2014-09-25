@@ -68,6 +68,7 @@ public class TuitionFeeAssessmentService {
 				  break;
 			  case GRADUATE:
 				  numberOfEnlistedGraduateSubject++;
+				  break;
 			}
 		}
 		
@@ -82,17 +83,22 @@ public class TuitionFeeAssessmentService {
 		switch(student.getShorlarshipStatus()){
 		  case NONE:
 			  totalSubjectTuitionFee = totalUndergraduateSubjctFee + totalGraduateSubjectFee;
+			  break;
 		  case HALF:
 			  totalSubjectTuitionFee = (totalUndergraduateSubjctFee + totalGraduateSubjectFee)	* PERCENTAGE_OF_HALF_SCHOLARSHIP_COVERAGE / 100;
+			  break;
 		  case FULL:
 			  totalSubjectTuitionFee = 0;
+			  break;
 		}
 		
 		TuitionFeeAssessment tuitionFeeAssessment = new TuitionFeeAssessment();
 		tuitionFeeAssessment.setStudent(student);
 		tuitionFeeAssessment.setNumberOfEnlistedUndergraduateSubject(numberOfEnlistedUndergraduateSubject);
+		tuitionFeeAssessment.setFeePerUndergraduateSubject(UNDERGRADUATE_SUBJECT_FEE_PER_SECTION);
 		tuitionFeeAssessment.setTotalUndergraduateSubjctFee(totalUndergraduateSubjctFee);
 		tuitionFeeAssessment.setNumberOfEnlistedGraduateSubject(numberOfEnlistedGraduateSubject);
+		tuitionFeeAssessment.setFeePerGraduateSubject(GRADUATE_SUBJECT_FEE_PER_SECTION);
 		tuitionFeeAssessment.setTotalGraduateSubjectFee(totalGraduateSubjectFee);
 		tuitionFeeAssessment.setTotalSubjectTuitionFee(totalSubjectTuitionFee);
 		tuitionFeeAssessment.setMiscellaneousFee(MISCELLANEOUS_FEES);

@@ -7,8 +7,10 @@ public class TuitionFeeAssessment {
 	private Student student;
 	private Term term;
 	private int numberOfEnlistedUndergraduateSubject;
+	private int feePerUndergraduateSubject;
 	private int totalUndergraduateSubjctFee;
 	private int numberOfEnlistedGraduateSubject;
+	private int feePerGraduateSubject;
 	private int totalGraduateSubjectFee;
 	private int totalSubjectTuitionFee;
 	private int miscellaneousFee;
@@ -34,6 +36,12 @@ public class TuitionFeeAssessment {
 			int numberOfEnlistedUndergraduateSubject) {
 		this.numberOfEnlistedUndergraduateSubject = numberOfEnlistedUndergraduateSubject;
 	}
+	public int getFeePerUndergraduateSubject() {
+		return feePerUndergraduateSubject;
+	}
+	public void setFeePerUndergraduateSubject(int feePerUndergraduateSubject) {
+		this.feePerUndergraduateSubject = feePerUndergraduateSubject;
+	}
 	public int getTotalUndergraduateSubjctFee() {
 		return totalUndergraduateSubjctFee;
 	}
@@ -46,6 +54,12 @@ public class TuitionFeeAssessment {
 	public void setNumberOfEnlistedGraduateSubject(
 			int numberOfEnlistedGraduateSubject) {
 		this.numberOfEnlistedGraduateSubject = numberOfEnlistedGraduateSubject;
+	}
+	public int getFeePerGraduateSubject() {
+		return feePerGraduateSubject;
+	}
+	public void setFeePerGraduateSubject(int feePerGraduateSubject) {
+		this.feePerGraduateSubject = feePerGraduateSubject;
 	}
 	public int getTotalGraduateSubjectFee() {
 		return totalGraduateSubjectFee;
