@@ -41,11 +41,7 @@ public class TuitionFeeAssessmentServlet extends HttpServlet {
 			TuitionFeeAssessment tuitionFeeAssessment = tuitionFeeAssessmentService.createTuitionFeeAssessmentOfCurrenctTerm(studentNumber);
 			session.setAttribute("tuitionFeeAssessment", tuitionFeeAssessment);
 		} else{
-			String tuitionFeeAssessmentError =	"Your enlisted units are less than minimum load.<br>" +
-												"Please enlist sections first. The minimum load of tuition fee assessment is the following:<br>" +
-												"Freshmen  : 15 units<br>" +
-												"Sophomore : 18 unuts<br>" +
-												"Junior    : 18 units";
+			String tuitionFeeAssessmentError = tuitionFeeAssessmentService.getTuitionFeeAssessmentErrorMessage();
 			session.setAttribute("tuitionFeeAssessmentError", tuitionFeeAssessmentError);
 		}
 		//Redirect to jsp

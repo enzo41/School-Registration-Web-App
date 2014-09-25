@@ -78,7 +78,7 @@ public class SectionCreationServlet extends HttpServlet {
 				session.setAttribute("sectionCreationError", e.getMessage());
 			}
 		}else{
-			String sectionCreationError = "Teacher is unavailable at the specified schedule. Teacher has a class.";
+			String sectionCreationError = sectionCreationService.getsectionCreationErrorMessage();
 			session.setAttribute("sectionCreationError", sectionCreationError);
 		}
 		

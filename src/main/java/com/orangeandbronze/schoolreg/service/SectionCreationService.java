@@ -86,5 +86,10 @@ public class SectionCreationService {
 		return sectionDao.getById(sectionNumber);
 		
 	}
+	
+	public String getsectionCreationErrorMessage(){
+		String errorMessage = "Teacher is unavailable at the specified schedule. Teacher has a class.";
+		return errorMessage;
+	}
 
 }

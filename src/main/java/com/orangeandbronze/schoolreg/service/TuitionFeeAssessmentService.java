@@ -102,4 +102,14 @@ public class TuitionFeeAssessmentService {
 		return tuitionFeeAssessment;
 	}
 	
+	public String getTuitionFeeAssessmentErrorMessage(){
+		String errorMessage =	"Your enlisted units are less than minimum load.<br>" +
+								"Please enlist sections first. The minimum load of tuition fee assessment is the following:<br>" +
+								"Freshmen  : " + FRESHMEN_MINIMUM_UNITS + " units<br>" +
+								"Sophomore : " + SOPHOMORE_MINIMUM_UNITS + " unuts<br>" +
+								"Junior    : " + JUNIOR_MINIMUM_UNITS + " units";
+		return errorMessage;
+		
+	}
+	
 }
