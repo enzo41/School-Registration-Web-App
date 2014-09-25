@@ -11,7 +11,7 @@
 <jsp:include page="/currentLoginUserInfo.jsp" />
 <c:choose>
 	<c:when test = "${empty tuitionFeeAssessmentError }">
-		<h1><u>Tuition Fee Assessment of ${tuitionFeeAssessment.term }</u></h1>
+		<h2><u>Tuition Fee Assessment of ${tuitionFeeAssessment.term }</u></h2>
 		<h4>Enlisted Undergraduate Subject: &nbsp; <u>P${ tuitionFeeAssessment.totalUndergraduateSubjctFee}</u></h4>
 		<p>Quantity ${ tuitionFeeAssessment.numberOfEnlistedUndergraduateSubject}, &nbsp; Fee per subject P${ tuitionFeeAssessment.feePerUndergraduateSubject}</p>
 		<h4>Enlisted Graduate Subject:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>P${ tuitionFeeAssessment.totalGraduateSubjectFee}</u></h4>
@@ -27,6 +27,30 @@
 		<p> ${ tuitionFeeAssessmentError }</p>
 	</c:otherwise>
 </c:choose>
+<br>
+<h3><u>Your section List</u></h3>
+ <table border="1">
+	 <col span="3" width="150">
+	 <col width="200">
+	 <col width="150">
+ 	<tr bgcolor="#dcdcdc">
+ 		<th>Section Number</th>
+ 		<th>Faculty Number</th>
+ 		<th>Subject ID</th>
+ 		<th>Subject type</th>
+ 		<th>Schedule</th>
+  	</tr>
+  	<c:forEach var="section" items="${tuitionFeeAssessment.sectionList}">
+  	  	<tr>
+  		<td>${ section.sectionNumber }</td>
+	  	<td align="right">${ section.instructor.facultyNumber }</td>
+  		<td>${ section.subject.subjectId }</td>
+  		<td>${ section.subject.subjectType }</td>
+  		<td>${ section.schedule }</td>
+  		</tr>
+ 	</c:forEach>
+</table>
+<br>
 <a href="index.jsp">Back to Menu Page</a>
 </body>
 </html>

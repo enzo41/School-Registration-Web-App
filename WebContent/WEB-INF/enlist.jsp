@@ -15,11 +15,21 @@
 
 		<h2>Choose Your Sections</h2>
 		<table border="1">
-		<tr><td></td><td>Section Number</td><td>Subject</td><td>Schedule</td></tr>
-			<c:forEach var="section" items="${sections}">
-			<tr><td><input type="radio" name="sectionNumber"
-					value="${section.sectionNumber }"></td><td>${section.sectionNumber }</td><td>${section.subject.subjectId }</td><td>${section.schedule.days } ${section.schedule.period }</td></tr>
-				
+		<col width="30" align="center">
+		<col span="3" width="150">
+		<tr bgcolor="#dcdcdc">
+			<th></th>
+			<th>Section Number</th>
+			<th>Subject</th>
+			<th>Schedule</th>
+		</tr>
+		<c:forEach var="section" items="${sections}">
+		<tr>
+			<td><input type="radio" name="sectionNumber" value="${section.sectionNumber }"></td>
+			<td>${section.sectionNumber }</td>
+			<td>${section.subject.subjectId }</td>
+			<td>${section.schedule.days } ${section.schedule.period }</td>
+		</tr>		
 		</c:forEach>
 		</table>
 		<%--Catching of no section selected --%>
