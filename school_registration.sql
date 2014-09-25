@@ -173,7 +173,7 @@ CREATE TABLE `students` (
   `pk` int(11) NOT NULL,
   `student_number` int(11) DEFAULT NULL,
   `academic_year` int(11) DEFAULT NULL,
-  `scholarship` varchar(20) DEFAULT NULL, 
+  `scholarship_status` varchar(20) DEFAULT NULL, 
   PRIMARY KEY (`pk`),
   UNIQUE KEY `students_idx_01` (`student_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
