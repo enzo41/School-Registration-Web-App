@@ -40,7 +40,15 @@ public class SectionDaoTest extends DBTestCase {
 				add(new Section("DDD444", new Subject("PHILO1"), new Schedule(Days.TF, Period.PM4)));
 				add(new Section("EEE555", new Subject("CS11")));
 				add(new Section("GGG777", new Subject("MATH11")));
-				add(new Section("ZZZ000", new Subject("CHEM11"), new Schedule(	Days.TF, Period.PM4)));
+				add(new Section("ZZZ000", new Subject("CHEM11"), new Schedule(	Days.MTH, Period.PM4)));
+				add(new Section("MA110MTAM", new Subject("MA1"), new Schedule(	Days.TF, Period.AM10)));
+				add(new Section("MA220TFPM", new Subject("MA2"), new Schedule(	Days.WS, Period.PM4)));
+				add(new Section("MA330WSAM", new Subject("MA3"), new Schedule(	Days.WS, Period.AM1130)));
+				add(new Section("EN1040MTAM", new Subject("EN1"), new Schedule(	Days.MTH, Period.AM10)));
+				add(new Section("EN2050TFPM", new Subject("EN2"), new Schedule(	Days.TF, Period.PM1)));
+				add(new Section("HI1100WSAM", new Subject("HI1"), new Schedule(	Days.WS, Period.AM1130)));
+				add(new Section("HI2100TFPM", new Subject("HI1"), new Schedule(	Days.TF, Period.PM1)));
+				
 			}
 		};
 		SectionDao dao = new SectionDao();
@@ -105,25 +113,25 @@ public class SectionDaoTest extends DBTestCase {
 		
 		int maxPk = sectionDao.getMaxPk();
 		
-		assertEquals(12 , maxPk);
+		assertEquals(14 , maxPk);
 		
 	}
 	
 	public void testCreateSection(){
 		SectionDao sectionDao = new SectionDao();
 		
-		sectionDao.createSection(13, "EN1040WSAM", 11, 4, "WS AM1130");
+		sectionDao.createSection(15, "HI1400WSAM", 13, 4, "WS AM1130");
 		
-		Section section = sectionDao.getById("EN1040WSAM");
+		Section section = sectionDao.getById("HI1400WSAM");
 		
-		assertEquals("EN1" , section.getSubject().getSubjectId());
+		assertEquals("HI1" , section.getSubject().getSubjectId());
 		assertEquals(new Integer("40") , section.getInstructor().getFacultyNumber());
 		assertEquals("WS AM1130" , section.getSchedule().toString());
 
 	}
 	
 
-	public void testFetchEnrollmentSectionOfCurrenctTerm(){
+	public void testFetchEnrollmentSectionOfCurrenctTermResultNotNull(){
 		SectionDao sectionDao = new SectionDao();
 		int studentNumber = 11;
 		Term currentTerm = Term.getCurrent();
@@ -133,6 +141,18 @@ public class SectionDaoTest extends DBTestCase {
 		assertEquals(7, sectionList.size());
 
 	}
+	
+	public void testFetchEnrollmentSectionOfCurrenctTermResultNull(){
+		SectionDao sectionDao = new SectionDao();
+		int studentNumber = 55;
+		Term currentTerm = Term.getCurrent();
+		
+		List<Section> sectionList = sectionDao.fetchEnrollmentSectionOfCurrenctTerm(studentNumber, currentTerm);
+		
+		assertEquals(0, sectionList.size());
+
+	}
+	
 	
 
 }

@@ -60,8 +60,8 @@ public class EnlistServiceTest {
 		when(sectionDao.getById(sectionNumbers[3])).thenReturn(ddd444);
 		when(sectionDao.getById(sectionNumbers[4])).thenReturn(eee555);
 		EnrollmentDao enrollmentDao = mock(EnrollmentDao.class);
-		when(enrollmentDao.getBy(student, Term.getCurrent())).thenReturn(currentEnrollment);
-		when(enrollmentDao.getBy(student, Term.Y2012_1ST)).thenReturn(previousEnrollment);
+		when(enrollmentDao.getBy(studentNumber, student, Term.getCurrent())).thenReturn(currentEnrollment);
+		when(enrollmentDao.getBy(studentNumber, student, Term.Y2012_1ST)).thenReturn(previousEnrollment);
 		
 		EnlistService service = new EnlistService();
 //		Temporary commentout in order to clear error

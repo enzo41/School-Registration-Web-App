@@ -23,7 +23,6 @@
 	<subjects pk="14"  subject_id="HI2"  subject_type="GRADUATE"/>
 	
 	
-
 	<subject_prerequisites pk="1" fk_subject="3" fk_prerequisite="1"/>
 	<subject_prerequisites pk="2" fk_subject="3" fk_prerequisite="2"/>
 	<subject_prerequisites pk="3" fk_subject="10" fk_prerequisite="8"/>
@@ -38,15 +37,12 @@
     <sections pk="5"  section_number="EEE555"  fk_subject="5"   fk_faculty="0"   schedule="TBA"/>
     <sections pk="6"  section_number="GGG777"  fk_subject="1"   fk_faculty="0"   schedule="TBA"/>
     <sections pk="7"  section_number="ZZZ000"  fk_subject="4"   fk_faculty="0"   schedule="TF PM4"/>
-	<sections pk="8"  section_number="MA110MTAM"  fk_subject="1"   fk_faculty="1"   schedule="MTH AM10"/>
-	<sections pk="9"  section_number="MA220TFPM"  fk_subject="2"   fk_faculty="2"   schedule="TF PM4"/>
-	<sections pk="10"  section_number="MA330WSAM"  fk_subject="3"   fk_faculty="3"   schedule="WS AM1130"/>
-	<sections pk="11"  section_number="EN1040MTAM"  fk_subject="4"   fk_faculty="4"   schedule="MTH AM10"/>
-	<sections pk="12"  section_number="EN2050TFPM"  fk_subject="5"   fk_faculty="5"   schedule="TF PM1"/>
-	<sections pk="13"  section_number="HI1100WSAM"  fk_subject="6"   fk_faculty="1"   schedule="WS AM1130"/>
-	<sections pk="14"  section_number="HI2100TFPM"  fk_subject="7"   fk_faculty="1"   schedule="TF PM1"/>
-	
-
-    
+	<sections pk="8"  section_number="MA110MTAM"  fk_subject="8"   fk_faculty="1"   schedule="MTH AM10"/>
+	<sections pk="9"  section_number="MA220TFPM"  fk_subject="9"   fk_faculty="2"   schedule="TF PM4"/>
+	<sections pk="10"  section_number="MA330WSAM"  fk_subject="10"   fk_faculty="3"   schedule="WS AM1130"/>
+	<sections pk="11"  section_number="EN1040MTAM"  fk_subject="11"   fk_faculty="4"   schedule="MTH AM10"/>
+	<sections pk="12"  section_number="EN2050TFPM"  fk_subject="12"   fk_faculty="5"   schedule="TF PM1"/>
+	<sections pk="13"  section_number="HI1100WSAM"  fk_subject="13"   fk_faculty="1"   schedule="WS AM1130"/>
+	<sections pk="14"  section_number="HI2100TFPM"  fk_subject="14"   fk_faculty="1"   schedule="TF PM1"/>
 
 </dataset>
