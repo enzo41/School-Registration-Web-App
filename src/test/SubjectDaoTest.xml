@@ -1,0 +1,19 @@
+<!DOCTYPE dataset SYSTEM "src/test/datasets.dtd">
+<dataset>
+
+	<subjects pk="1"  subject_id="MATH11"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="2"  subject_id="MATH14"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="3"  subject_id="MATH53"  subject_type="GRADUATE"/>
+	<subjects pk="4"  subject_id="CHEM11"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="5"  subject_id="CS11"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="6"  subject_id="COM1"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="7"  subject_id="PHILO1"  subject_type="GRADUATE"/>
+	<subjects pk="8"  subject_id="MA1"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="9"  subject_id="MA2"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="10"  subject_id="MA3"  subject_type="GRADUATE"/>
+	<subjects pk="11"  subject_id="EN1"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="12"  subject_id="EN2"  subject_type="GRADUATE"/>
+	<subjects pk="13"  subject_id="HI1"  subject_type="UNDERGRADUATE"/>
+	<subjects pk="14"  subject_id="HI2"  subject_type="GRADUATE"/>
+
+</dataset>
