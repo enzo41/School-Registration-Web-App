@@ -1,11 +1,14 @@
 package com.orangeandbronze.schoolreg.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.orangeandbronze.schoolreg.dao.EnrollmentSectionDao;
 import com.orangeandbronze.schoolreg.dao.EnrollmentSectionDaoImpl;
+import com.orangeandbronze.schoolreg.dao.SectionDao;
 import com.orangeandbronze.schoolreg.dao.StudentDao;
 import com.orangeandbronze.schoolreg.dao.StudentDaoImpl;
+import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Term;
 
@@ -19,6 +22,7 @@ public class TuitionFeeAssessmentService {
 	
 	EnrollmentSectionDao enrollmentSectionDao = new EnrollmentSectionDaoImpl();
 	StudentDao studentDao = new StudentDaoImpl();
+	SectionDao sectionDao = new SectionDao();
 	
 	public boolean checkTotalEnlistedUnitsOfCurrentTermMoreThanMinimumLoad(int studentNumber){
 		
@@ -26,25 +30,29 @@ public class TuitionFeeAssessmentService {
 		Integer totalEnlistedUnits = numberOfEnlistedSection * UNIT_PER_SUBJECT;
 		
 		Student student = studentDao.getStudentByStudentNumber(studentNumber);
-		boolean isGreaterThanMinimum = false;
+		boolean isGreaterEqualMinimum = false;
 		
 		switch (student.getAcademicYear()) {
-        case 1:  isGreaterThanMinimum = (totalEnlistedUnits >= FRESHMEN_MINIMUM_UNITS);
+        case 1:  isGreaterEqualMinimum = (totalEnlistedUnits >= FRESHMEN_MINIMUM_UNITS);
                  break;
-        case 2:  isGreaterThanMinimum = (totalEnlistedUnits >= SOPHOMORE_MINIMUM_UNITS);
+        case 2:  isGreaterEqualMinimum = (totalEnlistedUnits >= SOPHOMORE_MINIMUM_UNITS);
                  break;
-        case 3:  isGreaterThanMinimum = (totalEnlistedUnits >= JUNIOR_MINIMUM_UNITS);
+        case 3:  isGreaterEqualMinimum = (totalEnlistedUnits >= JUNIOR_MINIMUM_UNITS);
                  break;
-        case 4:  isGreaterThanMinimum = (totalEnlistedUnits >= SENIOR_MINIMUM_UNITS);
+        case 4:  isGreaterEqualMinimum = (totalEnlistedUnits >= SENIOR_MINIMUM_UNITS);
                  break;
 		}
 		
-		return isGreaterThanMinimum;
+		return isGreaterEqualMinimum;
 	}
 	
 	
 	public BigDecimal calculateTuitionFeeOfCurrenctTerm(int studentNumber){
 
+		//Fetch Enlisted Sections of current term
+		List<Section> sectionListOfCurrenctTerm = sectionDao.fetchEnrollmentSectionOfCurrenctTerm();
+		
+		
 		//Count the number of enlisted undergraduate subject
 		
 		//Count the number of enlisted graduate subject

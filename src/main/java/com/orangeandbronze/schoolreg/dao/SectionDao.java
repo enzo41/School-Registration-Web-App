@@ -242,6 +242,7 @@ public class SectionDao extends Dao {
 					 		"enrollments	er, " +
 					 		"enrollment_sections	es, " +
 					 		"sections		sc, " +
+					 		
 					 		"faculty		fa, " +
 					 		"subjects		sb " +
 					 "where	st.student_number	=	? " +
@@ -257,11 +258,13 @@ public class SectionDao extends Dao {
 				
 		try (Connection conn = getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentNumber);
+			pstmt.setString(2, currentTerm.toString());
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				
 				String sectionNumber = rs.getString("sc.section_number");
-				Subject subject = new Subject(rs.getString("sb.subject_id"), SubjectType.valueOf(rs.getString("sb.subject_id")));
+				Subject subject = new Subject(rs.getString("sb.subject_id"), SubjectType.valueOf(rs.getString("sb.subject_type")));
 				String[] dayPeriod = rs.getString("sc.schedule").split("\\s+");
 				Schedule schedule = new Schedule(Days.valueOf(dayPeriod[0]), Period.valueOf(dayPeriod[1]));
 				Faculty faculty = new Faculty(rs.getInt("fa.faculty_number"));

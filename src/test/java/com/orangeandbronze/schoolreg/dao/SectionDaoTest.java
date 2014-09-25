@@ -2,6 +2,7 @@ package com.orangeandbronze.schoolreg.dao;
 
 import java.io.FileReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.dbunit.DBTestCase;
@@ -10,11 +11,11 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 
 import com.orangeandbronze.schoolreg.domain.Days;
-import com.orangeandbronze.schoolreg.domain.Faculty;
 import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
+import com.orangeandbronze.schoolreg.domain.Term;
 
 public class SectionDaoTest extends DBTestCase {
 
@@ -118,6 +119,18 @@ public class SectionDaoTest extends DBTestCase {
 		assertEquals("EN1" , section.getSubject().getSubjectId());
 		assertEquals(new Integer("40") , section.getInstructor().getFacultyNumber());
 		assertEquals("WS AM1130" , section.getSchedule().toString());
+
+	}
+	
+
+	public void testFetchEnrollmentSectionOfCurrenctTerm(){
+		SectionDao sectionDao = new SectionDao();
+		int studentNumber = 11;
+		Term currentTerm = Term.getCurrent();
+		
+		List<Section> sectionList = sectionDao.fetchEnrollmentSectionOfCurrenctTerm(studentNumber, currentTerm);
+		
+		assertEquals(7, sectionList.size());
 
 	}
 	

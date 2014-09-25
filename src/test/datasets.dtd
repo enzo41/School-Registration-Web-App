@@ -62,5 +62,7 @@
 <!ATTLIST subjects
     pk CDATA #REQUIRED
     subject_id CDATA #IMPLIED
+    subject_type CDATA #IMPLIED
+    
 >
 

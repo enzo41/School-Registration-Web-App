@@ -7,6 +7,8 @@ public class Subject extends Entity {
 	
 	private final String subjectId;
 	private final Set<Subject> prerequisites = new HashSet<>();
+	private SubjectType subjectType;
+
 
 	public Subject(String subjectId) {
 		this.subjectId = subjectId;
@@ -17,6 +19,19 @@ public class Subject extends Entity {
 		this.prerequisites.addAll(prerequisites);
 	}
 
+	public SubjectType getSubjectType() {
+		return subjectType;
+	}
+	
+	public Subject(String subjectId, SubjectType subjectType) {
+		this.subjectId = subjectId;
+		this.subjectType = subjectType;
+	}
+
+	public void setSubjectType(SubjectType subjectType) {
+		this.subjectType = subjectType;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
