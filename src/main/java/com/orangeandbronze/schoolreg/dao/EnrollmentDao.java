@@ -166,17 +166,19 @@ public class EnrollmentDao extends Dao {
 		return maxESPk;
 	}
 
-	public boolean hasScheduleConflicts(String schedule, Integer studentPk) {
+	public boolean hasScheduleConflicts(String schedule, Integer studentPk, Term term) {
+		String currentTerm = term.toString();
 		Integer count=0;
 		
 		String sql = "SELECT sections.schedule FROM enrollments " +
 		"INNER JOIN enrollment_sections ON enrollments.pk = enrollment_sections.fk_enrollment " +
 		"INNER JOIN sections ON enrollment_sections.fk_sections = sections.pk " +
-		"WHERE enrollments.fk_students = ?";
+		"WHERE enrollments.fk_students = ? and enrollments.term = ?";
 		
 		try (Connection conn = getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, studentPk);
+			pstmt.setString(2, currentTerm);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -197,16 +199,18 @@ public class EnrollmentDao extends Dao {
 		}
 	}
 
-	public boolean isSameSection(Integer sectionNumberPk, Integer studentPk) {
+	public boolean isSameSection(Integer sectionNumberPk, Integer studentPk, Term term) {
+		String currentTerm = term.toString();
 		Integer count=0;
 		
 		String sql = "SELECT enrollment_sections.fk_sections FROM enrollments INNER JOIN "+
 				"enrollment_sections ON enrollments.pk = enrollment_sections.fk_enrollment "+
-				"WHERE enrollments.fk_students = ?";
+				"WHERE enrollments.fk_students = ? and enrollments.term = ?";
 		
 		try (Connection conn = getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, studentPk);
+			pstmt.setString(2, currentTerm);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
