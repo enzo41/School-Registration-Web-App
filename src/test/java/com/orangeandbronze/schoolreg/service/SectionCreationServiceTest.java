@@ -21,5 +21,12 @@ public class SectionCreationServiceTest {
 			assertEquals(true , isAvailable);
 			
 		}
+		
+		@Test
+		public void testCheckTeacherScheduleAvailabilityReurnFalse(){
+			
+		}
+		
+		
 
 }
