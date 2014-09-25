@@ -37,7 +37,7 @@ public class EnrollmentSectionDaoImpl extends Dao implements
 			}
 	
 		} catch (SQLException e) {
-			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+			throw new DataAccessException("Something happend while trying to fetch EnrollmentSection data", e);
 		}
 		
 		return count;

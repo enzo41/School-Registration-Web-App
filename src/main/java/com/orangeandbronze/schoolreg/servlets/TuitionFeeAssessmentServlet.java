@@ -30,11 +30,12 @@ public class TuitionFeeAssessmentServlet extends HttpServlet {
 		//Check the number of unit if it is greater than minimum load or not
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		boolean isMoreThanMinimumLoad = tuitionFeeAssessmentService.checkTotalEnlistedUnitsOfCurrentTermMoreThanMinimumLoad(user.getUserId());
+		Integer studentNumber = user.getUserId();
+		boolean isMoreThanMinimumLoad = tuitionFeeAssessmentService.checkTotalEnlistedUnitsOfCurrentTermMoreThanMinimumLoad(studentNumber);
 		
 		if(isMoreThanMinimumLoad){
 			//Caluculate tuition fee
-			BigDecimal tuitionFee = tuitionFeeAssessmentService.calculateTuitionFeeOfCurrenctTerm();
+			BigDecimal tuitionFee = tuitionFeeAssessmentService.calculateTuitionFeeOfCurrenctTerm(studentNumber);
 		} else{
 			
 		}
