@@ -28,7 +28,7 @@ public class Section extends Entity {
 		this(sectionNumber, subject, schedule);
 		this.instructor = instructor;
 	}
-
+	
 	public String getSectionNumber() {
 		return sectionNumber;
 	}

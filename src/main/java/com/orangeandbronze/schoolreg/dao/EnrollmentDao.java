@@ -1,10 +1,5 @@
 package com.orangeandbronze.schoolreg.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.orangeandbronze.schoolreg.domain.Enrollment;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Term;

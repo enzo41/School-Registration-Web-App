@@ -34,3 +34,17 @@ insert into sections (pk, section_number, fk_subject, fk_faculty, schedule) valu
 insert into subject_prerequisites (pk, fk_subject, fk_prerequisite) values (1, 3, 1);
 insert into subject_prerequisites (pk, fk_subject, fk_prerequisite) values (2, 3, 2);
 insert into subject_prerequisites (pk, fk_subject, fk_prerequisite) values (3, 5, 3);
+
+-- enrollments sample data
+insert into enrollments (pk, enrollment_number, fk_students, term) values (1, 101, 1, 'Y2014_1ST');
+
+
+-- enrollment_sections sample data
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (1, 1, 8);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (2, 1, 9);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (3, 1, 10);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (4, 1, 11);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (5, 1, 12);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (6, 1, 13);
+insert into enrollment_sections (pk, fk_enrollment, fk_sections) values (7, 1, 14);
+

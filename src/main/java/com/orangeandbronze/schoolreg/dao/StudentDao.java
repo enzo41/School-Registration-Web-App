@@ -9,14 +9,6 @@ public interface StudentDao {
 	List<Student> getAllStudents();
 	Integer getPkById(int studentNumber);
 	List<Integer> getStudentsInt();
+	Student getStudentByStudentNumber(int studentNumber);
 
 }
-
-/*
-public class StudentDao extends Dao {
-	
-	public Student getById(int studentId) {
-		return new Student(studentId); // TODO Just a stub; implement actual as JDBC
-	}
-
-}*/

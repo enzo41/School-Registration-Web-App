@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orangeandbronze.schoolreg.domain.ShorlarshipStatus;
 import com.orangeandbronze.schoolreg.domain.Student;
 
 public class StudentDaoImpl extends Dao implements StudentDao {
@@ -75,5 +76,28 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 		}
 		return studentList;
 }
+
+	@Override
+	public Student getStudentByStudentNumber(int studentNumber){
+		
+		String sql = "select academic_year, scholarship_status from students where student_number = ?";
+		Student student = new Student(studentNumber);
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentNumber);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				student.setAcademicYear(rs.getInt("academic_year"));
+				student.setShorlarshipStatus(ShorlarshipStatus.valueOf(rs.getString("scholarship_status")));
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Student data", e);
+		}
+		
+		return student;
+	}
 }
 

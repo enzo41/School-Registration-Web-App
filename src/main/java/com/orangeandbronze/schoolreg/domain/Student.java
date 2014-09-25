@@ -8,7 +8,9 @@ import java.util.TreeSet;
 public class Student extends Entity {
 	
 	private final Integer studentNumber;
-	
+	private Integer academicYear;
+	private ShorlarshipStatus shorlarshipStatus;
+
 	private final SortedSet<Enrollment> enrollments = new TreeSet<>();
 
 	public Student(Integer studentNumber) {
@@ -18,6 +20,22 @@ public class Student extends Entity {
 	public Student(Integer studentNumber, Set<Enrollment> enrollments) {
 		this.studentNumber = studentNumber;
 		this.enrollments.addAll(enrollments);
+	}
+
+	public Integer getAcademicYear() {
+		return academicYear;
+	}
+
+	public void setAcademicYear(Integer academicYear) {
+		this.academicYear = academicYear;
+	}
+
+	public ShorlarshipStatus getShorlarshipStatus() {
+		return shorlarshipStatus;
+	}
+
+	public void setShorlarshipStatus(ShorlarshipStatus shorlarshipStatus) {
+		this.shorlarshipStatus = shorlarshipStatus;
 	}
 
 	public Integer getStudentNumber() {
