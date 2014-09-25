@@ -53,9 +53,17 @@ public class EnlistService {
 		Map<Section, String> failedToEnlist = new HashMap<>();
 		for (Section section : sections) {
 			try {
-				enrollment.enlist(section);
-				successfullyEnlisted.add(section);
-				sectionPk = sectionDao.getSectionNumberPk(section.getSectionNumber().toString());
+				//enrollment.enlist(section);
+				if(enrollmentDao.hasScheduleConflicts(section.getSchedule().toString(),studentPk)){
+					throw new EnlistmentConflictException("Current Section: " + section.getSectionNumber() + "has schedule conflict.");
+				}
+				else if(enrollmentDao.isSameSection(sectionDao.getSectionNumberPk(section.getSectionNumber().toString()),studentPk)) {
+					throw new EnlistmentConflictException("Current Section: " + section.getSectionNumber() + "has already been enlisted/taken.");
+				}
+				else {
+					successfullyEnlisted.add(section);
+					sectionPk = sectionDao.getSectionNumberPk(section.getSectionNumber().toString());
+				}
 			} catch (EnlistmentConflictException e) {
 				failedToEnlist.put(section, "Conflict with sections already enlisted.");
 			} catch (MissingPrerequisitesException e) {
