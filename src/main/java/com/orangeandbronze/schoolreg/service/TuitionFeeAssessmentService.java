@@ -1,6 +1,5 @@
 package com.orangeandbronze.schoolreg.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.orangeandbronze.schoolreg.dao.EnrollmentSectionDao;
@@ -14,36 +13,28 @@ import com.orangeandbronze.schoolreg.domain.Term;
 import com.orangeandbronze.schoolreg.domain.TuitionFeeAssessment;
 
 public class TuitionFeeAssessmentService {
-	private final int UNIT_PER_SUBJECT = 3;
-	private final int FRESHMEN_MINIMUM_UNITS = 15;
-	private final int SOPHOMORE_MINIMUM_UNITS = 18;
-	private final int JUNIOR_MINIMUM_UNITS = 18;
-	private final int SENIOR_MINIMUM_UNITS = 0;
-	private final int UNDERGRADUATE_SUBJECT_FEE_PER_SECTION = 2000;
-	private final int GRADUATE_SUBJECT_FEE_PER_SECTION = 4000;
-	private final int MISCELLANEOUS_FEES = 2000;
-	private final int PERCENTAGE_OF_HALF_SCHOLARSHIP_COVERAGE = 50;
 	
 	EnrollmentSectionDao enrollmentSectionDao = new EnrollmentSectionDaoImpl();
 	StudentDao studentDao = new StudentDaoImpl();
 	SectionDao sectionDao = new SectionDao();
+	TuitionFeeAssessment tuitionFeeAssessment = new TuitionFeeAssessment();
 	
 	public boolean checkTotalEnlistedUnitsOfCurrentTermMoreThanMinimumLoad(int studentNumber){
 		
 		Integer numberOfEnlistedSection = enrollmentSectionDao.countEnlistedSection(studentNumber, Term.getCurrent());
-		Integer totalEnlistedUnits = numberOfEnlistedSection * UNIT_PER_SUBJECT;
+		Integer totalEnlistedUnits = numberOfEnlistedSection * tuitionFeeAssessment.UNIT_PER_SUBJECT;
 		
 		Student student = studentDao.getStudentByStudentNumber(studentNumber);
 		boolean isGreaterEqualMinimum = false;
 		
 		switch (student.getAcademicYear()) {
-        case 1:  isGreaterEqualMinimum = (totalEnlistedUnits >= FRESHMEN_MINIMUM_UNITS);
+        case 1:  isGreaterEqualMinimum = (totalEnlistedUnits >= tuitionFeeAssessment.FRESHMEN_MINIMUM_UNITS);
                  break;
-        case 2:  isGreaterEqualMinimum = (totalEnlistedUnits >= SOPHOMORE_MINIMUM_UNITS);
+        case 2:  isGreaterEqualMinimum = (totalEnlistedUnits >= tuitionFeeAssessment.SOPHOMORE_MINIMUM_UNITS);
                  break;
-        case 3:  isGreaterEqualMinimum = (totalEnlistedUnits >= JUNIOR_MINIMUM_UNITS);
+        case 3:  isGreaterEqualMinimum = (totalEnlistedUnits >= tuitionFeeAssessment.JUNIOR_MINIMUM_UNITS);
                  break;
-        case 4:  isGreaterEqualMinimum = (totalEnlistedUnits >= SENIOR_MINIMUM_UNITS);
+        case 4:  isGreaterEqualMinimum = (totalEnlistedUnits >= tuitionFeeAssessment.SENIOR_MINIMUM_UNITS);
                  break;
 		}
 		
@@ -72,8 +63,8 @@ public class TuitionFeeAssessmentService {
 			}
 		}
 		
-		int totalUndergraduateSubjctFee = numberOfEnlistedUndergraduateSubject * UNDERGRADUATE_SUBJECT_FEE_PER_SECTION;
-		int totalGraduateSubjectFee = numberOfEnlistedGraduateSubject * GRADUATE_SUBJECT_FEE_PER_SECTION;
+		int totalUndergraduateSubjctFee = numberOfEnlistedUndergraduateSubject * tuitionFeeAssessment.UNDERGRADUATE_SUBJECT_FEE_PER_SECTION;
+		int totalGraduateSubjectFee = numberOfEnlistedGraduateSubject * tuitionFeeAssessment.GRADUATE_SUBJECT_FEE_PER_SECTION;
 		
 		//Check scholarship status
 		Student student = studentDao.getStudentByStudentNumber(studentNumber);
@@ -85,24 +76,20 @@ public class TuitionFeeAssessmentService {
 			  totalSubjectTuitionFee = totalUndergraduateSubjctFee + totalGraduateSubjectFee;
 			  break;
 		  case HALF:
-			  totalSubjectTuitionFee = (totalUndergraduateSubjctFee + totalGraduateSubjectFee)	* PERCENTAGE_OF_HALF_SCHOLARSHIP_COVERAGE / 100;
+			  totalSubjectTuitionFee = (totalUndergraduateSubjctFee + totalGraduateSubjectFee)	* tuitionFeeAssessment.PERCENTAGE_OF_HALF_SCHOLARSHIP_COVERAGE / 100;
 			  break;
 		  case FULL:
 			  totalSubjectTuitionFee = 0;
 			  break;
 		}
 		
-		TuitionFeeAssessment tuitionFeeAssessment = new TuitionFeeAssessment();
 		tuitionFeeAssessment.setStudent(student);
 		tuitionFeeAssessment.setNumberOfEnlistedUndergraduateSubject(numberOfEnlistedUndergraduateSubject);
-		tuitionFeeAssessment.setFeePerUndergraduateSubject(UNDERGRADUATE_SUBJECT_FEE_PER_SECTION);
 		tuitionFeeAssessment.setTotalUndergraduateSubjctFee(totalUndergraduateSubjctFee);
 		tuitionFeeAssessment.setNumberOfEnlistedGraduateSubject(numberOfEnlistedGraduateSubject);
-		tuitionFeeAssessment.setFeePerGraduateSubject(GRADUATE_SUBJECT_FEE_PER_SECTION);
 		tuitionFeeAssessment.setTotalGraduateSubjectFee(totalGraduateSubjectFee);
 		tuitionFeeAssessment.setTotalSubjectTuitionFee(totalSubjectTuitionFee);
-		tuitionFeeAssessment.setMiscellaneousFee(MISCELLANEOUS_FEES);
-		tuitionFeeAssessment.setTotalTuitionFee(totalSubjectTuitionFee + MISCELLANEOUS_FEES);
+		tuitionFeeAssessment.setTotalTuitionFee(totalSubjectTuitionFee + tuitionFeeAssessment.MISCELLANEOUS_FEES);
 		tuitionFeeAssessment.setSectionList(sectionListOfCurrenctTerm);
 		
 		return tuitionFeeAssessment;
@@ -111,9 +98,9 @@ public class TuitionFeeAssessmentService {
 	public String getTuitionFeeAssessmentErrorMessage(){
 		String errorMessage =	"Your enlisted units are less than minimum load.<br>" +
 								"Please enlist sections first. The minimum load of tuition fee assessment is the following:<br>" +
-								"Freshmen  : " + FRESHMEN_MINIMUM_UNITS + " units<br>" +
-								"Sophomore : " + SOPHOMORE_MINIMUM_UNITS + " unuts<br>" +
-								"Junior    : " + JUNIOR_MINIMUM_UNITS + " units";
+								"Freshmen  : " + tuitionFeeAssessment.FRESHMEN_MINIMUM_UNITS + " units<br>" +
+								"Sophomore : " + tuitionFeeAssessment.SOPHOMORE_MINIMUM_UNITS + " unuts<br>" +
+								"Junior    : " + tuitionFeeAssessment.JUNIOR_MINIMUM_UNITS + " units";
 		return errorMessage;
 		
 	}

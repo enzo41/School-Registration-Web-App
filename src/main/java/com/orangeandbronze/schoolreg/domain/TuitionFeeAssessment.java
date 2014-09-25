@@ -3,6 +3,15 @@ package com.orangeandbronze.schoolreg.domain;
 import java.util.List;
 
 public class TuitionFeeAssessment {
+	public final int UNIT_PER_SUBJECT = 3;
+	public final int FRESHMEN_MINIMUM_UNITS = 15;
+	public final int SOPHOMORE_MINIMUM_UNITS = 18;
+	public final int JUNIOR_MINIMUM_UNITS = 18;
+	public final int SENIOR_MINIMUM_UNITS = 0;
+	public final int UNDERGRADUATE_SUBJECT_FEE_PER_SECTION = 2000;
+	public final int GRADUATE_SUBJECT_FEE_PER_SECTION = 4000;
+	public final int MISCELLANEOUS_FEES = 2000;
+	public final int PERCENTAGE_OF_HALF_SCHOLARSHIP_COVERAGE = 50;
 	
 	private Student student;
 	private Term term;
@@ -17,6 +26,12 @@ public class TuitionFeeAssessment {
 	private int totalTuitionFee;
 	private List<Section> sectionList;
 
+	public TuitionFeeAssessment(){
+		this.feePerUndergraduateSubject = UNDERGRADUATE_SUBJECT_FEE_PER_SECTION;
+		this.feePerGraduateSubject = GRADUATE_SUBJECT_FEE_PER_SECTION;
+		this.miscellaneousFee = MISCELLANEOUS_FEES;
+	}
+	
 	public Student getStudent() {
 		return student;
 	}
