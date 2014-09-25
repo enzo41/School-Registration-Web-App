@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.orangeandbronze.schoolreg.domain.Days;
@@ -13,6 +15,8 @@ import com.orangeandbronze.schoolreg.domain.Period;
 import com.orangeandbronze.schoolreg.domain.Schedule;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Subject;
+import com.orangeandbronze.schoolreg.domain.SubjectType;
+import com.orangeandbronze.schoolreg.domain.Term;
 
 // TODO Factor out duplicate code
 public class SectionDao extends Dao {
@@ -225,5 +229,53 @@ public class SectionDao extends Dao {
 		}
 		
 		return sectionPk;
+	}
+
+	public List<Section> fetchEnrollmentSectionOfCurrenctTerm(Integer studentNumber, Term currentTerm) {
+		
+		String sql = "select	sc.section_number, " +
+								"fa.faculty_number, " +
+								"sb.subject_id, " +
+								"sb.subject_type, " +
+								"sc.schedule " +
+					 "from	students		st, " +
+					 		"enrollments	er, " +
+					 		"enrollment_sections	es, " +
+					 		"sections		sc, " +
+					 		"faculty		fa, " +
+					 		"subjects		sb " +
+					 "where	st.student_number	=	? " +
+					 "and	er.fk_students		=	st.pk " +
+					 "and	er.term				=	? " +
+					 "and	es.fk_enrollment	=	er.pk " +
+					 "and	sc.pk				=	es.fk_sections " +
+					 "and	fa.pk				=	sc.fk_faculty " +
+					 "and	sb.pk				=	sc.fk_subject " +
+					 "order by sc.section_number";
+		
+		List<Section> sectionList = new ArrayList<>();
+				
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()){
+				
+				String sectionNumber = rs.getString("sc.section_number");
+				Subject subject = new Subject(rs.getString("sb.subject_id"), SubjectType.valueOf(rs.getString("sb.subject_id")));
+				String[] dayPeriod = rs.getString("sc.schedule").split("\\s+");
+				Schedule schedule = new Schedule(Days.valueOf(dayPeriod[0]), Period.valueOf(dayPeriod[1]));
+				Faculty faculty = new Faculty(rs.getInt("fa.faculty_number"));
+				
+				Section section = new Section(sectionNumber, subject, schedule, faculty);
+				
+				sectionList.add(section);
+			}
+		}
+		catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Section data", e);
+		}
+		
+		return sectionList;		
+
 	}
 }
