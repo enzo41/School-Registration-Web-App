@@ -1,5 +1,10 @@
 package com.orangeandbronze.schoolreg.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.orangeandbronze.schoolreg.domain.Enrollment;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Term;
@@ -160,18 +165,3 @@ public class EnrollmentDao extends Dao {
 	}
 
 }
-
-/*
-public class EnrollmentDao {
-
-	/ Should return a new Enrollment if none exists, or fetch an existing one. /
-	public Enrollment getBy(Student student, Term term) {
-		return new Enrollment(777, student, term); // TODO Just a stub; implement actual as JDBC
-	}
-
-	public void save(Enrollment enrollment) {
-		// TODO Auto-generated method stub		
-	}
-
-}
-*/
