@@ -1,0 +1,9 @@
+<!DOCTYPE dataset SYSTEM "src/test/datasets.dtd">
+<dataset>
+    <faculty pk="1"  faculty_number="10"/>
+    <faculty pk="2"  faculty_number="20"/>
+    <faculty pk="3"  faculty_number="30"/>
+    <faculty pk="4"  faculty_number="40"/>
+    <faculty pk="5"  faculty_number="50"/>
+
+</dataset>

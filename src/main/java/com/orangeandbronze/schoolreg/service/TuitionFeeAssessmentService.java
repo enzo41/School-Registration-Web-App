@@ -84,6 +84,7 @@ public class TuitionFeeAssessmentService {
 		}
 		
 		tuitionFeeAssessment.setStudent(student);
+		tuitionFeeAssessment.setTerm(Term.getCurrent());
 		tuitionFeeAssessment.setNumberOfEnlistedUndergraduateSubject(numberOfEnlistedUndergraduateSubject);
 		tuitionFeeAssessment.setTotalUndergraduateSubjctFee(totalUndergraduateSubjctFee);
 		tuitionFeeAssessment.setNumberOfEnlistedGraduateSubject(numberOfEnlistedGraduateSubject);
