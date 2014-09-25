@@ -16,8 +16,10 @@
 		<p>Quantity ${ tuitionFeeAssessment.numberOfEnlistedUndergraduateSubject}, &nbsp; Fee per subject P${ tuitionFeeAssessment.feePerUndergraduateSubject}</p>
 		<h4>Enlisted Graduate Subject:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>Subtotal P${ tuitionFeeAssessment.totalGraduateSubjectFee}</u></h4>
 		<p>Quantity ${ tuitionFeeAssessment.numberOfEnlistedGraduateSubject }, &nbsp; Fee per subject P${ tuitionFeeAssessment.feePerGraduateSubject}</p>
+		<c:if test="${ tuitionFeeAssessment.student.shorlarshipStatus != 'NONE' }">
 		<h4>Scholarship covers ${ tuitionFeeAssessment.student.shorlarshipStatus } of subject fee</h4>
-		<h4>Miscellaneous Fee : &nbsp;&nbsp;&nbsp;<u>P${ tuitionFeeAssessment.miscellaneousFee }</u></h4>
+		</c:if>
+		<h4>Miscellaneous Fee : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>P${ tuitionFeeAssessment.miscellaneousFee }</u></h4>
 		<h3>Total Tuition Fee : <u>P${ tuitionFeeAssessment.totalTuitionFee }</u></h3>
 	</c:when>
 	<c:otherwise>
