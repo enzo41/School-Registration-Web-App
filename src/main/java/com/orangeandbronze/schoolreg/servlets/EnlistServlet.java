@@ -38,8 +38,6 @@ public class EnlistServlet extends HttpServlet {
 		// added try and catch for null data or no section selected to loop in showSections
 		catch(NullPointerException e){
 		session.setAttribute("noSection", true);
-		session.setAttribute("sampleD", true);
-		session.setAttribute("selection", sectionNumbers[0]);
 		response.sendRedirect(getServletContext().getContextPath() + "/showSections");
 		}
 	}
