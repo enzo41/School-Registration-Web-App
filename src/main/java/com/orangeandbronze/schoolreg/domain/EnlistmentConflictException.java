@@ -3,7 +3,7 @@ package com.orangeandbronze.schoolreg.domain;
 public class EnlistmentConflictException extends RuntimeException {
 
 
-	EnlistmentConflictException(String message) {
+	public EnlistmentConflictException(String message) {
 		super(message);
 	}
 

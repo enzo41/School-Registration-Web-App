@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.orangeandbronze.schoolreg.domain.Enrollment;
+import com.orangeandbronze.schoolreg.domain.Schedule;
+import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Term;
 
@@ -162,6 +164,71 @@ public class EnrollmentDao extends Dao {
 		}
 		
 		return maxESPk;
+	}
+
+	public boolean hasScheduleConflicts(String schedule, Integer studentPk, Term term) {
+		String currentTerm = term.toString();
+		Integer count=0;
+		
+		String sql = "SELECT sections.schedule FROM enrollments " +
+		"INNER JOIN enrollment_sections ON enrollments.pk = enrollment_sections.fk_enrollment " +
+		"INNER JOIN sections ON enrollment_sections.fk_sections = sections.pk " +
+		"WHERE enrollments.fk_students = ? and enrollments.term = ?";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentPk);
+			pstmt.setString(2, currentTerm);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				String fetch = rs.getString("schedule");
+				if(schedule.equals(fetch)){
+					count++;
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Enrollment data", e);
+		}
+		if(count==0){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	public boolean isSameSection(Integer sectionNumberPk, Integer studentPk, Term term) {
+		String currentTerm = term.toString();
+		Integer count=0;
+		
+		String sql = "SELECT enrollment_sections.fk_sections FROM enrollments INNER JOIN "+
+				"enrollment_sections ON enrollments.pk = enrollment_sections.fk_enrollment "+
+				"WHERE enrollments.fk_students = ? and enrollments.term = ?";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentPk);
+			pstmt.setString(2, currentTerm);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Integer fetch = rs.getInt("fk_sections");
+				if(sectionNumberPk.equals(fetch)){
+					count++;
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Enrollment data", e);
+		}
+		if(count==0){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 }

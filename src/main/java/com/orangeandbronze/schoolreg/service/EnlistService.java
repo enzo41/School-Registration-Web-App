@@ -37,6 +37,7 @@ public class EnlistService {
 	 *         reason why they failed to enlist.
 	 */
 	public EnlistmentResult enlistSections(Integer studentNumber, String[] sectionNumbers) {
+		String errorMessage=null;
 		// Fetch domain objects from DB
 		Student student = new Student(studentNumber);
 		Integer studentPk = studentDao.getPkById(studentNumber);
@@ -53,11 +54,21 @@ public class EnlistService {
 		Map<Section, String> failedToEnlist = new HashMap<>();
 		for (Section section : sections) {
 			try {
-				enrollment.enlist(section);
-				successfullyEnlisted.add(section);
-				sectionPk = sectionDao.getSectionNumberPk(section.getSectionNumber().toString());
+				//enrollment.enlist(section);
+				if(enrollmentDao.isSameSection(sectionDao.getSectionNumberPk(section.getSectionNumber().toString()),studentPk, Term.getCurrent())) {
+					errorMessage = "Cannot enroll in the same section.";
+					throw new EnlistmentConflictException("Current Section: " + section.getSectionNumber() + "has already been enlisted/taken.");
+				}
+				else if(enrollmentDao.hasScheduleConflicts(section.getSchedule().toString(),studentPk, Term.getCurrent())){
+					errorMessage = "Schedule conflict for the chosen section.";
+					throw new EnlistmentConflictException("Current Section: " + section.getSectionNumber() + "has schedule conflict.");
+				}
+				else {
+					successfullyEnlisted.add(section);
+					sectionPk = sectionDao.getSectionNumberPk(section.getSectionNumber().toString());
+				}
 			} catch (EnlistmentConflictException e) {
-				failedToEnlist.put(section, "Conflict with sections already enlisted.");
+				failedToEnlist.put(section, errorMessage);
 			} catch (MissingPrerequisitesException e) {
 				failedToEnlist.put(section, "Missing prerequisite/s.");
 			}
