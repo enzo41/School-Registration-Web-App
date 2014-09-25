@@ -14,6 +14,7 @@
 <h2>What would you like to do?</h2>
 <ul>
 	<c:if test="${ user.type == 'STUDENT' }">
+	<c:set var="noSection" scope="session" value="false"/>
 	<li><strong><a href="${pageContext.request.contextPath}/showSections">Enlist Sections</a></strong></li><br>
 	<li><strong><a href="${pageContext.request.contextPath}/TuitionFeeAssessment">Tuition Fee Assessment</a></strong></li>
 	</c:if>

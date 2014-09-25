@@ -217,12 +217,17 @@ public class SectionDao extends Dao {
 	
 	public Integer getSectionNumberPk(String sectionNumber){
 		Integer sectionPk=null;
-		String sql = "select pk from sections where section_number = " + sectionNumber;
+		String sql = "select pk from sections where section_number = ?";
 		
 		try (Connection conn = getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sectionNumber);
 			ResultSet rs = pstmt.executeQuery();
-			sectionPk = rs.getInt("pk");
+			if(rs.next()){
+				sectionPk = rs.getInt(1); 
+			} else{
+				sectionPk = null;
+			}
 		}
 		catch (SQLException e) {
 			throw new DataAccessException("Something happend while trying to fetch Section data", e);

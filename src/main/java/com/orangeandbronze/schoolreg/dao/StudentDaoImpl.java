@@ -38,12 +38,18 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 	
 	@Override
 	public Integer getPkById(int studentNumber) {
-		String sql = "select pk from students where student_number = " + studentNumber;
+		String sql = "select pk from students where student_number = ?";
 		Integer studentId;
 		try (Connection conn = getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentNumber);
 			ResultSet rs = pstmt.executeQuery();
-			studentId = rs.getInt("pk");
+			
+			if(rs.next()){
+				studentId = rs.getInt(1); 
+			} else{
+				studentId = null;
+			}
 		}
 		catch (SQLException e) {
 			throw new DataAccessException("Something happend while trying to fetch Student data", e);

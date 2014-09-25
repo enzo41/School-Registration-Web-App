@@ -7,10 +7,7 @@ import java.util.Set;
 
 import com.orangeandbronze.schoolreg.dao.EnrollmentDao;
 import com.orangeandbronze.schoolreg.dao.SectionDao;
-import com.orangeandbronze.schoolreg.dao.StudentDao;
 import com.orangeandbronze.schoolreg.dao.StudentDaoImpl;
-import com.orangeandbronze.schoolreg.dao.mock.MockEnrollmentDao;
-import com.orangeandbronze.schoolreg.dao.mock.MockSectionDao;
 import com.orangeandbronze.schoolreg.domain.EnlistmentConflictException;
 import com.orangeandbronze.schoolreg.domain.Enrollment;
 import com.orangeandbronze.schoolreg.domain.MissingPrerequisitesException;
@@ -21,9 +18,8 @@ import com.orangeandbronze.schoolreg.domain.Term;
 public class EnlistService {
 
 	private StudentDaoImpl studentDao = new StudentDaoImpl();
-	private SectionDao sectionDao = new MockSectionDao();
+	private SectionDao sectionDao = new SectionDao();
 	private EnrollmentDao enrollmentDao = new EnrollmentDao();
-			//MockEnrollmentDao();
 	
 	public Set<Section> getAllSections() {
 		return sectionDao.getAll();
@@ -42,12 +38,15 @@ public class EnlistService {
 	 */
 	public EnlistmentResult enlistSections(Integer studentNumber, String[] sectionNumbers) {
 		// Fetch domain objects from DB
-		Student student = studentDao.getStudentByStudentNumber(studentNumber);
+		Student student = new Student(studentNumber);
+		Integer studentPk = studentDao.getPkById(studentNumber);
+		Integer sectionPk = 0;
 		Section[] sections = new Section[sectionNumbers.length];
 		for (int i = 0; i < sectionNumbers.length; i++) {
 			sections[i] = sectionDao.getById(sectionNumbers[i]);
 		}
-		Enrollment enrollment = enrollmentDao.getBy(student, Term.getCurrent());
+		Integer currentEnNo = enrollmentDao.getMaxEnNo();
+		Enrollment enrollment = enrollmentDao.getBy(currentEnNo, student, Term.getCurrent());
 
 		// delegate work to domain model
 		Set<Section> successfullyEnlisted = new HashSet<>();
@@ -56,6 +55,7 @@ public class EnlistService {
 			try {
 				enrollment.enlist(section);
 				successfullyEnlisted.add(section);
+				sectionPk = sectionDao.getSectionNumberPk(section.getSectionNumber().toString());
 			} catch (EnlistmentConflictException e) {
 				failedToEnlist.put(section, "Conflict with sections already enlisted.");
 			} catch (MissingPrerequisitesException e) {
@@ -63,9 +63,18 @@ public class EnlistService {
 			}
 		}
 
-		// must successfully save result to database before returning result, otherwise, throws DataAccessException
-		enrollmentDao.save(enrollment);
+		//Check if at least one successful enlistments
 		
+		if(successfullyEnlisted.isEmpty()==false) {
+		//Get requirements for saving to database
+		
+		Integer currentEnPk = enrollmentDao.getMaxPk();
+		Integer currentSEPk = enrollmentDao.getMaxSEPk();
+		Integer currentESPk = enrollmentDao.getMaxESPk();
+		
+		// must successfully save result to database before returning result, otherwise, throws DataAccessException
+		enrollmentDao.save(enrollment,studentPk,sectionPk,currentEnPk,currentSEPk,currentESPk);
+		}
 		return new EnlistmentResult(successfullyEnlisted, failedToEnlist);
 	}
 

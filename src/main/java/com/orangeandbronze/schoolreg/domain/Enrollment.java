@@ -32,6 +32,10 @@ public class Enrollment extends Entity implements Comparable<Enrollment>{
 		return student;
 	}
 	
+	public Term getTerm() {
+		return term;
+	}
+	
 	/** Returns a copy of the sections in this enrollment. **/
 	public Set<Section> getSections() {
 		return new HashSet<Section>(sections);
