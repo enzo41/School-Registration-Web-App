@@ -9,7 +9,7 @@ public class Student extends Entity {
 	
 	private final Integer studentNumber;
 	private Integer academicYear;
-	private String shorlarshipStatus;
+	private ShorlarshipStatus shorlarshipStatus;
 
 	private final SortedSet<Enrollment> enrollments = new TreeSet<>();
 
@@ -30,11 +30,11 @@ public class Student extends Entity {
 		this.academicYear = academicYear;
 	}
 
-	public String getShorlarshipStatus() {
+	public ShorlarshipStatus getShorlarshipStatus() {
 		return shorlarshipStatus;
 	}
 
-	public void setShorlarshipStatus(String shorlarshipStatus) {
+	public void setShorlarshipStatus(ShorlarshipStatus shorlarshipStatus) {
 		this.shorlarshipStatus = shorlarshipStatus;
 	}
 

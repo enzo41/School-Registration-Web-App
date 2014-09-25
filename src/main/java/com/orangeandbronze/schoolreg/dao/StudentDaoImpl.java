@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orangeandbronze.schoolreg.domain.ShorlarshipStatus;
 import com.orangeandbronze.schoolreg.domain.Student;
 
 public class StudentDaoImpl extends Dao implements StudentDao {
@@ -83,7 +84,7 @@ public class StudentDaoImpl extends Dao implements StudentDao {
 			
 			if(rs.next()){
 				student.setAcademicYear(rs.getInt("academic_year"));
-				student.setShorlarshipStatus(rs.getString("scholarship_status"));
+				student.setShorlarshipStatus(ShorlarshipStatus.valueOf(rs.getString("scholarship_status")));
 			}
 			
 		} catch (SQLException e) {

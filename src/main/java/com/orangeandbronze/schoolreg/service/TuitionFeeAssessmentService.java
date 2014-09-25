@@ -10,6 +10,7 @@ import com.orangeandbronze.schoolreg.dao.StudentDao;
 import com.orangeandbronze.schoolreg.dao.StudentDaoImpl;
 import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
+import com.orangeandbronze.schoolreg.domain.SubjectType;
 import com.orangeandbronze.schoolreg.domain.Term;
 
 public class TuitionFeeAssessmentService {
@@ -50,16 +51,28 @@ public class TuitionFeeAssessmentService {
 	public BigDecimal calculateTuitionFeeOfCurrenctTerm(int studentNumber){
 
 		//Fetch Enlisted Sections of current term
-		List<Section> sectionListOfCurrenctTerm = sectionDao.fetchEnrollmentSectionOfCurrenctTerm();
+		List<Section> sectionListOfCurrenctTerm = sectionDao.fetchEnrollmentSectionOfCurrenctTerm(studentNumber, Term.getCurrent());
 		
+		//Count the number of enlisted undergraduate subject graduate subject
+		int undergraduateSubjectCount = 0;
+		int graduateSubjectCount = 0;
 		
-		//Count the number of enlisted undergraduate subject
-		
-		//Count the number of enlisted graduate subject
+		for(Section section: sectionListOfCurrenctTerm){
+			
+			switch (section.getSubject().getSubjectType()){
+			  case UNDERGRADUATE:
+				  undergraduateSubjectCount++;
+				  break;
+			  case GRADUATE:
+				  graduateSubjectCount++;
+			}
+		}
 		
 		//Check scholarship status
+		Student student = studentDao.getStudentByStudentNumber(studentNumber);
 		
 		//Calculate tuition fee
+		
 		
 		return new BigDecimal("0");
 	}
