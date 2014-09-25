@@ -49,6 +49,8 @@
 <!ATTLIST students
     pk CDATA #REQUIRED
     student_number CDATA #IMPLIED
+    academic_year CDATA #IMPLIED
+    scholarship_status CDATA #IMPLIED
 >
 
 <!ELEMENT subject_prerequisites EMPTY>

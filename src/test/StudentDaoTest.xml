@@ -1,0 +1,10 @@
+<!DOCTYPE dataset SYSTEM "src/test/datasets.dtd">
+<dataset>
+
+	<students pk="1"	student_number="11"	academic_year="1"	scholarship_status="HALF"/>
+	<students pk="2"	student_number="22"	academic_year="2"	scholarship_status="NONE"/>
+	<students pk="3"	student_number="33"	academic_year="3"	scholarship_status="HALF"/>
+	<students pk="4"	student_number="44"	academic_year="4"	scholarship_status="FULL"/>
+	<students pk="5"	student_number="55"	academic_year="1"	scholarship_status="NONE"/>
+
+</dataset>
