@@ -105,5 +105,26 @@ public class TuitionFeeAssessmentService {
 		return errorMessage;
 		
 	}
+
+
+	public void setEnrollmentSectionDao(EnrollmentSectionDao enrollmentSectionDao) {
+		this.enrollmentSectionDao = enrollmentSectionDao;
+	}
+
+
+	public void setStudentDao(StudentDao studentDao) {
+		this.studentDao = studentDao;
+	}
+
+
+	public void setSectionDao(SectionDao sectionDao) {
+		this.sectionDao = sectionDao;
+	}
+
+
+	public void setTuitionFeeAssessment(TuitionFeeAssessment tuitionFeeAssessment) {
+		this.tuitionFeeAssessment = tuitionFeeAssessment;
+	}
+	
 	
 }

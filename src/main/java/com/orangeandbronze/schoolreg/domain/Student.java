@@ -21,6 +21,13 @@ public class Student extends Entity {
 		this.studentNumber = studentNumber;
 		this.enrollments.addAll(enrollments);
 	}
+	
+	public Student(Integer studentNumber, Integer academicYear, ShorlarshipStatus shorlarshipStatus) {
+		this.studentNumber = studentNumber;
+		this.academicYear = academicYear;
+		this.shorlarshipStatus = shorlarshipStatus;
+	}
+	
 
 	public Integer getAcademicYear() {
 		return academicYear;
