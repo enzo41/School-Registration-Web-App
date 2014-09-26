@@ -18,16 +18,16 @@ public class Subject extends Entity {
 		this.subjectId = subjectId;
 		this.prerequisites.addAll(prerequisites);
 	}
-
-	public SubjectType getSubjectType() {
-		return subjectType;
-	}
 	
 	public Subject(String subjectId, SubjectType subjectType) {
 		this.subjectId = subjectId;
 		this.subjectType = subjectType;
 	}
 
+	public SubjectType getSubjectType() {
+		return subjectType;
+	}
+	
 	public void setSubjectType(SubjectType subjectType) {
 		this.subjectType = subjectType;
 	}
