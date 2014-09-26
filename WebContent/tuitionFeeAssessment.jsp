@@ -21,35 +21,35 @@
 		</c:if>
 		<h4>Miscellaneous Fee : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>P${ tuitionFeeAssessment.miscellaneousFee }</u></h4>
 		<h3>Total Tuition Fee : <u>P${ tuitionFeeAssessment.totalTuitionFee }</u></h3>
+		<br>
+		<h3><u>Your section List</u></h3>
+		 <table border="1">
+			 <col span="3" width="150">
+			 <col width="200">
+			 <col width="150">
+		 	<tr bgcolor="#dcdcdc">
+		 		<th>Section Number</th>
+		 		<th>Faculty Number</th>
+		 		<th>Subject ID</th>
+		 		<th>Subject type</th>
+		 		<th>Schedule</th>
+		  	</tr>
+		  	<c:forEach var="section" items="${tuitionFeeAssessment.sectionList}">
+		  	  	<tr>
+		  		<td>${ section.sectionNumber }</td>
+			  	<td align="right">${ section.instructor.facultyNumber }</td>
+		  		<td>${ section.subject.subjectId }</td>
+		  		<td>${ section.subject.subjectType }</td>
+		  		<td>${ section.schedule }</td>
+		  		</tr>
+		 	</c:forEach>
+		</table>
 	</c:when>
 	<c:otherwise>
 		<h1>${tuitionFeeAssessment.term } Tuition Fee Assessment</h1>
 		<p> ${ tuitionFeeAssessmentError }</p>
 	</c:otherwise>
 </c:choose>
-<br>
-<h3><u>Your section List</u></h3>
- <table border="1">
-	 <col span="3" width="150">
-	 <col width="200">
-	 <col width="150">
- 	<tr bgcolor="#dcdcdc">
- 		<th>Section Number</th>
- 		<th>Faculty Number</th>
- 		<th>Subject ID</th>
- 		<th>Subject type</th>
- 		<th>Schedule</th>
-  	</tr>
-  	<c:forEach var="section" items="${tuitionFeeAssessment.sectionList}">
-  	  	<tr>
-  		<td>${ section.sectionNumber }</td>
-	  	<td align="right">${ section.instructor.facultyNumber }</td>
-  		<td>${ section.subject.subjectId }</td>
-  		<td>${ section.subject.subjectType }</td>
-  		<td>${ section.schedule }</td>
-  		</tr>
- 	</c:forEach>
-</table>
 <br>
 <a href="index.jsp">Back to Menu Page</a>
 </body>
