@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.orangeandbronze.schoolreg.domain.Enrollment;
-import com.orangeandbronze.schoolreg.domain.Schedule;
-import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
 import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.domain.Term;
@@ -238,7 +236,7 @@ public class EnrollmentDao extends Dao {
 		String subjectId = subject.getSubjectId();
 		Integer subjectPk = 0;
 		String term = current.toString();
-		Integer[] subjectsTaken = null;
+		List<Integer> subjectsTaken = new ArrayList<>();
 		Integer prerequisites = null;
 		Integer noSubjTaken = 0;
 		int x = 0;
@@ -278,7 +276,8 @@ public class EnrollmentDao extends Dao {
 			
 			int i = 0;
 			while (rs.next()){
-				subjectsTaken[i] = rs.getInt("pk");
+				Integer subjectTakenPk = rs.getInt("pk");
+				subjectsTaken.add(subjectTakenPk);
 				i++;
 			}
 			noSubjTaken = i;
@@ -300,7 +299,7 @@ public class EnrollmentDao extends Dao {
 				prerequisites = rs.getInt("fk_prerequisite");
 				if(noSubjTaken!=0){
 					while(noSubjTaken>i){
-						if(prerequisites.equals(subjectsTaken[i])){
+						if(prerequisites.equals(subjectsTaken.get(i))){
 							y++;
 						}
 						i++;
