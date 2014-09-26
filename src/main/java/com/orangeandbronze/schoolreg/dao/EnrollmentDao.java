@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.orangeandbronze.schoolreg.domain.Enrollment;
-import com.orangeandbronze.schoolreg.domain.Schedule;
-import com.orangeandbronze.schoolreg.domain.Section;
 import com.orangeandbronze.schoolreg.domain.Student;
+import com.orangeandbronze.schoolreg.domain.Subject;
 import com.orangeandbronze.schoolreg.domain.Term;
 
 public class EnrollmentDao extends Dao {
@@ -227,6 +228,94 @@ public class EnrollmentDao extends Dao {
 			return false;
 		}
 		else{
+			return true;
+		}
+	}
+
+	public boolean prereqNotTaken(Subject subject, Integer studentPk, Term current) {
+		String subjectId = subject.getSubjectId();
+		Integer subjectPk = 0;
+		String term = current.toString();
+		List<Integer> subjectsTaken = new ArrayList<>();
+		Integer prerequisites = null;
+		Integer noSubjTaken = 0;
+		int x = 0;
+		int y = 0;
+		
+		// Get pk of subject
+		
+		String sql = "SELECT pk FROM subjects WHERE subject_id = ?";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subjectId);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				subjectPk = rs.getInt("pk"); 
+			} else{
+				subjectPk = null;
+			}
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Enrollment data", e);
+		}
+		
+		// Get subjects already taken
+		
+		sql = "SELECT subjects.pk FROM enrollments INNER JOIN enrollment_sections " +
+				"ON enrollments.pk = enrollment_sections.fk_enrollment INNER JOIN sections " +
+				"ON enrollment_sections.fk_sections = sections.pk INNER JOIN subjects " +
+				"ON sections.fk_subject = subjects.pk " +
+				"WHERE enrollments.fk_students = ? and enrollments.term<> ?";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, studentPk);
+			pstmt.setString(2, term);
+			ResultSet rs = pstmt.executeQuery();
+			
+			int i = 0;
+			while (rs.next()){
+				Integer subjectTakenPk = rs.getInt("pk");
+				subjectsTaken.add(subjectTakenPk);
+				i++;
+			}
+			noSubjTaken = i;
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Enrollment data", e);
+		}
+		
+		//Get Prerequisites using subject.pk
+		
+		sql = "SELECT fk_prerequisite FROM subject_prerequisites where fk_subject = ?";
+		
+		try (Connection conn = getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, subjectPk);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()){
+				int i = 0;
+				prerequisites = rs.getInt("fk_prerequisite");
+				if(noSubjTaken!=0){
+					while(noSubjTaken>i){
+						if(prerequisites.equals(subjectsTaken.get(i))){
+							y++;
+						}
+						i++;
+					}
+				}
+				x++;
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new DataAccessException("Something happend while trying to fetch Enrollment data", e);
+		}
+		if(x==y) {
+			return false;
+		}
+		else {
 			return true;
 		}
 	}
