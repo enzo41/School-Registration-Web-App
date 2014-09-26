@@ -92,4 +92,18 @@ public class SectionCreationService {
 		return errorMessage;
 	}
 
+	public void setFacultyDao(FacultyDao facultyDao) {
+		this.facultyDao = facultyDao;
+	}
+
+	public void setSubjectDao(SubjectDao subjectDao) {
+		this.subjectDao = subjectDao;
+	}
+
+	public void setSectionDao(SectionDao sectionDao) {
+		this.sectionDao = sectionDao;
+	}
+	
+	
+
 }
